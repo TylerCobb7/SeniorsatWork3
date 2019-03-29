@@ -9,7 +9,7 @@ public class User {
     int age = 0;
     String firstName = "Default";
     String lastName = "User";
-    //String email;
+    String email;
 
     //constructors
     public User(String email) {
