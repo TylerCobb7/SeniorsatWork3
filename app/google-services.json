@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "445627093413-i7lu7ii8120a1t29isi3q7ldq5ekqq0e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uncme.seniors_at_work",
+            "certificate_hash": "35a5ab95b6e092ed94639573a4b8429fb841f9ad"
+          }
+        },
+        {
           "client_id": "445627093413-6lonk1381jsv1mid6sc5dg5acplb59jd.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "445627093413-6lonk1381jsv1mid6sc5dg5acplb59jd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
