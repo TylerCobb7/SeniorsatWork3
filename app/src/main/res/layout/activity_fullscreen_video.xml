@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#0099cc"
+    tools:context=".FullscreenVideo">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <VideoView
+        android:id="@+id/videoFull"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@color/black_overlay"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent" />
+
+
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/btnPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/videoFull"
+        android:layout_alignEnd="@+id/videoFull"
+        android:layout_alignBottom="@+id/videoFull"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="178dp"
+        android:layout_marginTop="343dp"
+        android:layout_marginEnd="178dp"
+        android:layout_marginBottom="343dp"
+        android:onClick="videoPlay"
+        app:srcCompat="@android:drawable/ic_media_play" />
+
+</RelativeLayout>

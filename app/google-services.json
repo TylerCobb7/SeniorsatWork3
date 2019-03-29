@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "445627093413",
+    "firebase_url": "https://seniors-at-work.firebaseio.com",
+    "project_id": "seniors-at-work",
+    "storage_bucket": "seniors-at-work.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445627093413:android:c8233335e7a4ea1f",
+        "android_client_info": {
+          "package_name": "uncme.seniors_at_work"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "445627093413-6lonk1381jsv1mid6sc5dg5acplb59jd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtJDzcP4Ljr30Mqo4YTXHJOCTiDW4b1gw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
