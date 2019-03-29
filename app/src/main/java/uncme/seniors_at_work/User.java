@@ -3,6 +3,7 @@ package uncme.seniors_at_work;
 public class User {
 
     //test comment from davids branch
+    //test comment from Nick's Branch
 
     //attributes
     int age = 0;
