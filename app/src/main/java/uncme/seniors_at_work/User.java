@@ -10,6 +10,7 @@ public class User {
     String firstName = "Default";
     String lastName = "User";
     String email;
+    //String test;
 
     //constructors
     public User(String email) {
