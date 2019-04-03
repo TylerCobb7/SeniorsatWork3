@@ -2,11 +2,15 @@ package uncme.seniors_at_work;
 
 public class User {
 
+    //test comment from davids branch
+    //test comment from Nick's Branch
+
     //attributes
     int age = 0;
     String firstName = "Default";
     String lastName = "User";
     String email;
+    //String test;
 
     //constructors
     public User(String email) {
