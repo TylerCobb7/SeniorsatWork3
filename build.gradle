@@ -18,7 +18,7 @@ buildscript {
         // in the individual module build.gradle files
     }
     dependencies {
-        classpath 'com.google.gms:google-services:4.1.0'
+        classpath 'com.google.gms:google-services:4.0.0'
     }
     var
 }
