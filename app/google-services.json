@@ -23,8 +23,28 @@
           }
         },
         {
-          "client_id": "445627093413-6lonk1381jsv1mid6sc5dg5acplb59jd.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "445627093413-e36d1m9qd081pco6gia7g1dck4us8fg3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uncme.seniors_at_work",
+            "certificate_hash": "3f9f2618b08a67e30e7fa057ca6980769d7893ae"
+          }
+        },
+        {
+          "client_id": "445627093413-h3sdfsa6275evcj3g07m01nf8m2a8qse.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uncme.seniors_at_work",
+            "certificate_hash": "e46522551f63a812557d0ee76405f2c970982c1b"
+          }
+        },
+        {
+          "client_id": "445627093413-55v7u84k1q08oosllus3s1qognfucf69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uncme.seniors_at_work",
+            "certificate_hash": "af6627e2ffda04185192107e31a9c92c8e68840b"
+          }
         }
       ],
       "api_key": [
@@ -33,20 +53,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "445627093413-6lonk1381jsv1mid6sc5dg5acplb59jd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
