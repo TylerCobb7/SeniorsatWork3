@@ -35,7 +35,7 @@
         android:layout_marginStart="108dp"
         android:layout_marginTop="224dp"
         android:layout_marginEnd="108dp"
-        android:onClick="videoPlay"
+        android:onClick="videoSelected"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/upvoteButton"

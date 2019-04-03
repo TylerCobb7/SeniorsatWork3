@@ -47,6 +47,12 @@ public class SecondActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+    public void videoSelected(View v) {
+
+        Intent intent = new Intent(SecondActivity.this, SelectedVideo.class);
+        startActivity(intent);
+
+    }
 
     public void userLogout(View v) {
         Intent intent = new Intent(SecondActivity.this, MainActivity.class);
