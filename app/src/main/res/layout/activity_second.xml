@@ -23,10 +23,10 @@
         android:layout_marginEnd="66dp"
         android:layout_marginBottom="1dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/downvote"
+        app:layout_constraintBottom_toBottomOf="@+id/downvoteButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/downvote"
-        app:layout_constraintTop_toTopOf="@+id/upvote" />
+        app:layout_constraintStart_toEndOf="@+id/downvoteButton"
+        app:layout_constraintTop_toTopOf="@+id/upvoteButton" />
 
     <ImageButton
         android:id="@+id/btnPlay"
@@ -38,7 +38,7 @@
         android:onClick="videoPlay"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/upvote"
+        app:layout_constraintStart_toStartOf="@+id/upvoteButton"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_media_play" />
 
@@ -85,7 +85,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/downvote"
+        android:id="@+id/downvoteButton"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="139dp"
@@ -94,11 +94,11 @@
         android:background="@null"
         app:layout_constraintEnd_toStartOf="@+id/video1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upvote"
+        app:layout_constraintTop_toBottomOf="@+id/upvoteButton"
         app:srcCompat="@drawable/bluedownvote" />
 
     <ImageButton
-        android:id="@+id/upvote"
+        android:id="@+id/upvoteButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
@@ -107,6 +107,21 @@
         app:layout_constraintBottom_toBottomOf="@+id/btnPlay"
         app:layout_constraintEnd_toStartOf="@+id/video1"
         app:srcCompat="@drawable/blueupvote" />
+
+    <TextView
+        android:id="@+id/voteCondition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:inputType="numberSigned"
+        android:text="Test"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
