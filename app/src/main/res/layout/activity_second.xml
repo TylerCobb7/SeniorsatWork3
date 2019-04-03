@@ -10,58 +10,103 @@
         android:id="@+id/HomePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="58dp"
         android:text="HomePage"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.071" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <VideoView
         android:id="@+id/video1"
-        android:layout_width="175dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginBottom="1dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/downvote"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/HomePage"
-        app:layout_constraintVertical_bias="0.11" />
+        app:layout_constraintStart_toEndOf="@+id/downvote"
+        app:layout_constraintTop_toTopOf="@+id/upvote" />
 
     <ImageButton
         android:id="@+id/btnPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="224dp"
+        android:layout_marginEnd="108dp"
         android:onClick="videoPlay"
-        app:layout_constraintBottom_toBottomOf="@+id/video1"
-        app:layout_constraintEnd_toEndOf="@+id/video1"
-        app:layout_constraintStart_toStartOf="@+id/video1"
-        app:layout_constraintTop_toTopOf="@+id/video1"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/upvote"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_media_play" />
 
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="userLogout"
+        android:text="Logout"
+        app:layout_constraintBottom_toTopOf="@+id/HomePage"
+        app:layout_constraintEnd_toEndOf="@+id/topButton"
+        app:layout_constraintTop_toTopOf="@+id/topButton"
+        tools:text="Logout" />
+
+    <Button
+        android:id="@+id/newButton"
+        android:layout_width="67dp"
+        android:layout_height="37dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Logout"
-        android:onClick="userLogout"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="New"
+        app:layout_constraintBottom_toTopOf="@+id/video1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintHorizontal_bias="0.594"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="Logout" />
+        app:layout_constraintVertical_bias="0.979" />
+
+    <Button
+        android:id="@+id/topButton"
+        android:layout_width="67dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:text="Top"
+        app:layout_constraintBottom_toTopOf="@+id/video1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/newButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/downvote"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        app:layout_constraintEnd_toStartOf="@+id/video1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upvote"
+        app:srcCompat="@drawable/bluedownvote" />
+
+    <ImageButton
+        android:id="@+id/upvote"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="38dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPlay"
+        app:layout_constraintEnd_toStartOf="@+id/video1"
+        app:srcCompat="@drawable/blueupvote" />
+
 
 </android.support.constraint.ConstraintLayout>
