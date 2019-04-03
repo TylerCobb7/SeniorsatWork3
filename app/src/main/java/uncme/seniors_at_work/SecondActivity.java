@@ -24,11 +24,21 @@ import java.net.URI;
 
 
 public class SecondActivity extends AppCompatActivity {
+    ImageButton sUpvoteButton;
+    ImageButton sDownvoteButton;
+    TextView sVoteCondition;
+    int reddit;
+
+    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference mConditionRef = myRef.child("VoteScore");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+        sVoteCondition = (TextView)findViewById(R.id.voteCondition);
+        sUpvoteButton = (ImageButton)findViewById(R.id.upvoteButton);
+        sDownvoteButton = (ImageButton)findViewById(R.id.downvoteButton);
     }
 
     public void videoPlay(View v) {
@@ -43,7 +53,35 @@ public class SecondActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        mConditionRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String upvoteCounter = dataSnapshot.getValue(String.class);
+                sVoteCondition.setText(upvoteCounter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        sUpvoteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mConditionRef.setValue("1");
+            }
+        });
+        sDownvoteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mConditionRef.setValue("-1");
+            }
+        });
+    }
 
 }
 

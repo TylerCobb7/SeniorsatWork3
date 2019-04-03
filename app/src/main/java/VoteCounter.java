@@ -17,7 +17,7 @@ import org.w3c.dom.Text;
 
 import uncme.seniors_at_work.R;
 import uncme.seniors_at_work.SecondActivity;
-
+/*
 public class VoteCounter extends SecondActivity {
     ImageButton sUpvoteButton;
     ImageButton sDownvoteButton;
@@ -43,7 +43,7 @@ public class VoteCounter extends SecondActivity {
         mConditionRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            Integer upvoteCounter = dataSnapshot.getValue(Integer.class);
+            String upvoteCounter = dataSnapshot.getValue(String.class);
             sVoteCondition.setText(upvoteCounter);
             }
 
@@ -55,14 +55,15 @@ public class VoteCounter extends SecondActivity {
         sUpvoteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mConditionRef.setValue("1");
+                mConditionRef.setValue("Hey");
             }
         });
         sDownvoteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mConditionRef.setValue(-1);
+                mConditionRef.setValue("Goodbye");
             }
         });
     }
 }
+*/
