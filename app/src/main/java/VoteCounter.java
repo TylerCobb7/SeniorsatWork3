@@ -24,7 +24,7 @@ public class VoteCounter extends SecondActivity {
     TextView sVoteCondition;
 
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mConditionRef = myRef.child("Votes");
+    DatabaseReference mConditionRef = myRef.child("VoteScore");
     private static final String TAG = "SecondActivity";
 
     @Override
