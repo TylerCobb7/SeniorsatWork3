@@ -62,6 +62,7 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, EditAccountSettingsActivity.class);
                 intent.putExtra(SERIALIZE_DATA, user);
+                startActivity(intent);
             }
         });
 
