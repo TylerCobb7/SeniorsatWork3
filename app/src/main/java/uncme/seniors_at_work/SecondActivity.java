@@ -59,6 +59,10 @@ public class SecondActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void commentPathway(View v) {
+        Intent intent = new Intent(SecondActivity.this, SelectedVideo.class);
+        startActivity(intent);
+    }
     @Override
     protected void onStart() {
         super.onStart();
