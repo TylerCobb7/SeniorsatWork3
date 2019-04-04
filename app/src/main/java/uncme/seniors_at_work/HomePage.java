@@ -32,7 +32,9 @@ public class HomePage extends AppCompatActivity {
     ImageButton sUpvoteButton;
     ImageButton sDownvoteButton;
     TextView sVoteCondition;
+    TextView postUserName;
     int reddit;
+    User user;
 
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mConditionRef = myRef.child("VoteScore");
@@ -44,8 +46,17 @@ public class HomePage extends AppCompatActivity {
         sVoteCondition = (TextView)findViewById(R.id.voteCondition);
         sUpvoteButton = (ImageButton)findViewById(R.id.upvoteButton);
         sDownvoteButton = (ImageButton)findViewById(R.id.downvoteButton);
+        User user  = (User) getIntent().getSerializableExtra("serializedata");
+
+        //get the user name text view and put the username of the user in it
+        postUserName = findViewById(R.id.post_user_name);
+        postUserName.setText(user.getUsername());
 
     }
+
+
+
+
 
     public void videoPlay(View v) {
 

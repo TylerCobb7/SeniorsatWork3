@@ -53,7 +53,7 @@
                 android:layout_height="60dp"
                 android:layout_marginLeft="4dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/profile" />
+                android:src="@drawable/downvote" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -181,7 +181,7 @@
                 android:layout_marginLeft="120dp"
                 android:baselineAlignBottom="false"
                 android:onClick="commentPathway"
-                android:src="@drawable/comment"
+                android:src="@drawable/downvote"
                 android:text="Comments" />
         </LinearLayout>
     </LinearLayout>

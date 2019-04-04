@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private Button Login;
     private Button SignUp;
     private int counter = 5;
+    String SERIALIZE_DATA = "serializedata";
+    User user;
 
 
     @Override
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         Info = (TextView)findViewById(R.id.tvInfo);
         Login = (Button)findViewById(R.id.btnLogin);
         SignUp = (Button)findViewById(R.id.btnSignup);
+
 
         SignUp.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -53,7 +56,13 @@ public class MainActivity extends AppCompatActivity {
     }
     private void validate(String userName, String userPassword){
         if((userName.equals("")) && (userPassword.equals(""))){
+
+            //create a new user object with the user credentials
+            user = new User(Name.getText().toString());
+            user.setUsername("default test");
             Intent intent = new Intent(MainActivity.this, HomePage.class);
+            //include the user object to pass to the next activity
+            intent.putExtra(SERIALIZE_DATA, user);
             startActivity(intent);
         }else{
             counter--;
