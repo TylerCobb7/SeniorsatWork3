@@ -57,10 +57,11 @@ public class HomePage extends AppCompatActivity {
         //postUserName.setText(user.getUsername());
 
         //functionality for account settings button
+
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomePage.this, EditAccountSettingsActivity.class);
+               Intent intent = new Intent(HomePage.this, EditAccountSettingsActivity.class);
                 intent.putExtra(SERIALIZE_DATA, user);
                 startActivity(intent);
             }
