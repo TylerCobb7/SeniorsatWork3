@@ -96,7 +96,7 @@ public class UserSignUp extends AppCompatActivity {
         if(TextUtils.isEmpty(userdob)){
             Toast.makeText(this, "Date of Birth field is empty", Toast.LENGTH_SHORT).show();
         }
-        else{
+        if((!(TextUtils.isEmpty(username)) && !(TextUtils.isEmpty(useremail)) && !(TextUtils.isEmpty(userpass)) && !(TextUtils.isEmpty(userdob))) == true){
             //Saves Users information if there is no blank input
             HashMap userMap = new HashMap();
             userMap.put("username", username);
