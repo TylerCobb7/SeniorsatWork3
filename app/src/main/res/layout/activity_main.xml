@@ -32,7 +32,8 @@
         tools:layout_editor_absoluteX="126dp"
         tools:layout_editor_absoluteY="125dp"
         android:layout_above="@+id/newPassword"
-        android:layout_toEndOf="@+id/progressBar" />
+        android:layout_toEndOf="@+id/progressBar"
+        tools:ignore="InvalidImeActionId" />
 
     <EditText
         android:id="@+id/newPassword"
@@ -47,7 +48,8 @@
         tools:layout_editor_absoluteX="106dp"
         tools:layout_editor_absoluteY="168dp"
         android:layout_above="@+id/changePass"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        tools:ignore="InvalidImeActionId" />
 
     <Button
         android:id="@+id/changePass"
@@ -131,10 +133,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="46dp"
         android:gravity="center"
-        //android:hint="@string/email_id"
+        />
+        <!--android:hint="@string/email_id"
         android:textSize="30sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold|italic" />-->
 
 </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+<!--</android.support.constraint.ConstraintLayout>-->
