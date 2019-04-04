@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "445627093413-e36d1m9qd081pco6gia7g1dck4us8fg3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uncme.seniors_at_work",
+            "certificate_hash": "3f9f2618b08a67e30e7fa057ca6980769d7893ae"
+          }
+        },
+        {
           "client_id": "445627093413-6lonk1381jsv1mid6sc5dg5acplb59jd.apps.googleusercontent.com",
           "client_type": 3
         }

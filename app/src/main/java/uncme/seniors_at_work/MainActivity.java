@@ -36,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void validate(String userName, String userPassword){
-        if((userName.equals("")) && (userPassword.equals(""))){
+        if((userName.equals("Test@uncc.edu")) && (userPassword.equals("1234"))){
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
             startActivity(intent);
         }else{
             counter--;
 
-            Info.setText("No of attempts remaining " + String.valueOf(counter));
+            Info.setText("No of attempts remaining: " + String.valueOf(counter));
 
             if(counter == 0){
                 Login.setEnabled(false);
