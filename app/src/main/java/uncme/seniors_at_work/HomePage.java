@@ -1,9 +1,14 @@
 package uncme.seniors_at_work;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.media.MediaPlayer;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,6 +44,7 @@ public class HomePage extends AppCompatActivity {
         sVoteCondition = (TextView)findViewById(R.id.voteCondition);
         sUpvoteButton = (ImageButton)findViewById(R.id.upvoteButton);
         sDownvoteButton = (ImageButton)findViewById(R.id.downvoteButton);
+
     }
 
     public void videoPlay(View v) {

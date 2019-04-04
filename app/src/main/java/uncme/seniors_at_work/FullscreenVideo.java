@@ -141,7 +141,7 @@ public class FullscreenVideo extends AppCompatActivity {
             hide();
         } else {
             //what goes here is when the screen is clicked again when in fullscreen
-            Intent intent = new Intent(FullscreenVideo.this, SecondActivity.class);
+            Intent intent = new Intent(FullscreenVideo.this, HomePage.class);
             startActivity(intent);
         }
     }
