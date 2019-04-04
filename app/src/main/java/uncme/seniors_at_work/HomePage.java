@@ -27,12 +27,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.net.URI;
 
+
 public class HomePage extends AppCompatActivity {
 
+    String SERIALIZE_DATA = "serializedata";
     ImageButton sUpvoteButton;
     ImageButton sDownvoteButton;
     TextView sVoteCondition;
     TextView postUserName;
+    Button settingsButton;
     int reddit;
     User user;
 
@@ -46,14 +49,23 @@ public class HomePage extends AppCompatActivity {
         sVoteCondition = (TextView)findViewById(R.id.voteCondition);
         sUpvoteButton = (ImageButton)findViewById(R.id.upvoteButton);
         sDownvoteButton = (ImageButton)findViewById(R.id.downvoteButton);
-        User user  = (User) getIntent().getSerializableExtra("serializedata");
+        settingsButton = findViewById(R.id.settings_button);
+        user  = (User) getIntent().getSerializableExtra("serializedata");
 
         //get the user name text view and put the username of the user in it
         postUserName = findViewById(R.id.post_user_name);
         postUserName.setText(user.getUsername());
 
-    }
+        //functionality for account settings button
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomePage.this, EditAccountSettingsActivity.class);
+                intent.putExtra(SERIALIZE_DATA, user);
+            }
+        });
 
+    }
 
 
 
