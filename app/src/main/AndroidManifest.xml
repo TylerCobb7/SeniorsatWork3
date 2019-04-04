@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomePage"></activity>
+        <activity android:name=".EditAccountSettingsActivity" />
+        <activity android:name=".HomePage" />
         <activity android:name=".AccountCreated" />
         <activity android:name=".UserSignUp" />
-        <activity android:name=".EditAccountSettingsActivity" />
         <activity android:name=".SelectedVideo" />
         <activity
             android:name=".FullscreenVideo"
