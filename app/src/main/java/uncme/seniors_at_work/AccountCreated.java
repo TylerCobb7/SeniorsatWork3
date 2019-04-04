@@ -17,6 +17,8 @@ public class AccountCreated extends AppCompatActivity {
 
         button = (Button)findViewById(R.id.btnBackToSignIn);
 
+        //Tells users account has been created
+        //Button takes users back to sign in page
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

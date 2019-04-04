@@ -74,6 +74,7 @@ public class UserSignUp extends AppCompatActivity {
         };
     }
 
+    //Save User information function
     private void SaveAccountInformation() {
 
         String username = UserName.getText().toString();
@@ -82,6 +83,7 @@ public class UserSignUp extends AppCompatActivity {
         String userdob = displayDate.getText().toString();
 
 
+        //Checks for blank input
         if(TextUtils.isEmpty(username)){
             Toast.makeText(this, "Username field is empty", Toast.LENGTH_SHORT).show();
         }
@@ -95,12 +97,14 @@ public class UserSignUp extends AppCompatActivity {
             Toast.makeText(this, "Date of Birth field is empty", Toast.LENGTH_SHORT).show();
         }
         else{
+            //Saves Users information if there is no blank input
             HashMap userMap = new HashMap();
             userMap.put("username", username);
             userMap.put("useremail", useremail);
             userMap.put("userpass", userpass);
             userMap.put("userdob", userdob);
 
+            //New activity is directed when the information is saved.
             Intent intent = new Intent(UserSignUp.this, AccountCreated.class);
             startActivity(intent);
         }
