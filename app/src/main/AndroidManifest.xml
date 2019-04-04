@@ -12,6 +12,7 @@
         <activity android:name=".HomePage"></activity>
         <activity android:name=".AccountCreated" />
         <activity android:name=".UserSignUp" />
+        <activity android:name=".EditAccountSettingsActivity" />
         <activity android:name=".SelectedVideo" />
         <activity
             android:name=".FullscreenVideo"
