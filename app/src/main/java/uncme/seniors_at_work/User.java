@@ -1,15 +1,36 @@
 package uncme.seniors_at_work;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     //test comment from davids branch
     //test comment from Nick's Branch
 
     //attributes
     int age = 0;
-    String firstName = "Default";
-    String lastName = "User";
-    String email;
+    private String username;
+    private String firstName = "Default";
+    private String lastName = "User";
+    private String email;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    private String dob; //birthdate
     //String test;
 
     //constructors
