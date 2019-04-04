@@ -63,6 +63,45 @@ public class SecondActivity extends AppCompatActivity {
         Intent intent = new Intent(SecondActivity.this, SelectedVideo.class);
         startActivity(intent);
     }
+    // ********lais code**************
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        sUpvoteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mConditionRef.setValue("1");
+            }
+        });
+        sDownvoteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mConditionRef.setValue("-1");
+            }
+        });
+
+        mConditionRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int upvoteCounter = 0;
+                //Check firebase for a "1" for upvote or "-1" for downvote
+                if(dataSnapshot.getValue().equals("1")) {
+                    //Increased number based on "1" or "-1"
+                    sVoteCondition.setText(Integer.toString(upvoteCounter + 1));
+                }
+                else{
+                    sVoteCondition.setText(Integer.toString(upvoteCounter - 1));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    /* ********old code*********
     @Override
     protected void onStart() {
         super.onStart();
@@ -90,7 +129,8 @@ public class SecondActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mConditionRef.setValue("-1");
             }
-        });
+        }); */
+
     }
 
 }
