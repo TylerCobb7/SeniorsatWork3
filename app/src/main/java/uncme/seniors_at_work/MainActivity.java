@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             //create a new user object with the user credentials
             user = new User(Name.getText().toString());
             user.setUsername("default test");
-            Intent intent = new Intent(MainActivity.this, HomePage.class);
+            Intent intent = new Intent(MainActivity.this, Camera.class);
             //include the user object to pass to the next activity
             intent.putExtra(SERIALIZE_DATA, user);
             startActivity(intent);
