@@ -54,7 +54,7 @@ public class HomePage extends AppCompatActivity {
 
         //get the user name text view and put the username of the user in it
         postUserName = findViewById(R.id.post_user_name);
-        postUserName.setText(user.getUsername());
+        //postUserName.setText(user.getUsername());
 
         //functionality for account settings button
         settingsButton.setOnClickListener(new View.OnClickListener() {
