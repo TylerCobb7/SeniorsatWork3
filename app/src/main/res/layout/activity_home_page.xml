@@ -163,6 +163,7 @@
                 android:id="@+id/upvoteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@null"
                 android:src="@drawable/blueupvote" />
 
             <TextView
@@ -178,16 +179,17 @@
                 android:id="@+id/downvoteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@null"
                 android:src="@drawable/bluedownvote"
-                android:textAlignment="center"
-                android:layout_gravity="center_horizontal"/>
+                android:textAlignment="center" />
 
 
             <ImageButton
                 android:id="@+id/commentPathway"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="120dp"
+                android:layout_marginLeft="153dp"
                 android:baselineAlignBottom="false"
                 android:onClick="commentPathway"
                 android:src="@drawable/comment"
