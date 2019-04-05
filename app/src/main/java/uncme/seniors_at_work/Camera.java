@@ -120,10 +120,12 @@ public class Camera extends AppCompatActivity {
         if (resultCode == RESULT_OK){
             //set the image captured to our ImageView
 
-            Bitmap combined = combineImages(bgBitmap,bmp);
+            //Bitmap combined = combineImages(bgBitmap,bmp);
             cImageView.setImageURI(image_uri);
         }
     }
+
+    /*
     public Bitmap combineImages(Bitmap background, Bitmap foreground) {
 
         int width = 0, height = 0;
@@ -227,5 +229,5 @@ public class Camera extends AppCompatActivity {
         return rotatedImg;
 
     }
-
+*/
 }
