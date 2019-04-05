@@ -106,7 +106,7 @@ public class HomePage extends AppCompatActivity {
                 break;
 
             case R.id.nav_settings:
-                intent = new Intent(HomePage.this, EditAccountSettingsActivity.class);
+                intent = new Intent(HomePage.this, MainActivity.class);
                 intent.putExtra(SERIALIZE_DATA, user);
                 startActivity(intent);
                 break;
