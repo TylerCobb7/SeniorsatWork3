@@ -190,6 +190,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="153dp"
+                android:background="@null"
                 android:baselineAlignBottom="false"
                 android:onClick="commentPathway"
                 android:src="@drawable/comment"

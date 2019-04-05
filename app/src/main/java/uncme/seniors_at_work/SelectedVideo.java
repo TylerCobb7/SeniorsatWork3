@@ -37,6 +37,7 @@ public class SelectedVideo extends AppCompatActivity {
 
 
         String videopath = "android.resource://uncme.seniors_at_work/" + R.raw.show;
+        String videopath2 = "android.resource://uncme.seniors_at_work/" + R.raw.movie;
         VideoView videoView = findViewById(R.id.videoView);
         Uri uri = Uri.parse(videopath);
 
@@ -46,7 +47,6 @@ public class SelectedVideo extends AppCompatActivity {
     }
     public void comments(View v) {
         Intent intent = new Intent(SelectedVideo.this, SelectedVideo.class);
-
     }
 
     public void videoPlay(View v) {
