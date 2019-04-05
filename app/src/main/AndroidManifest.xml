@@ -19,7 +19,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_fullscreen_video"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".AccountActivity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
