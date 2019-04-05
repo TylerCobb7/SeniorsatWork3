@@ -35,7 +35,7 @@ public class HomePage extends AppCompatActivity {
     ImageButton sDownvoteButton;
     TextView sVoteCondition;
     TextView postUserName;
-    Button settingsButton;
+    ImageButton settingsButton;
     int reddit;
     User user;
 
@@ -49,7 +49,7 @@ public class HomePage extends AppCompatActivity {
         sVoteCondition = (TextView)findViewById(R.id.voteCondition);
         sUpvoteButton = (ImageButton)findViewById(R.id.upvoteButton);
         sDownvoteButton = (ImageButton)findViewById(R.id.downvoteButton);
-        settingsButton = findViewById(R.id.settings_button);
+        settingsButton = (ImageButton) findViewById(R.id.settings_button);
         user  = (User) getIntent().getSerializableExtra("serializedata");
 
         //get the user name text view and put the username of the user in it
