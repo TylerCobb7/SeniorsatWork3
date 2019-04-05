@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Navigation"></activity>
         <activity android:name=".EditAccountSettingsActivity" />
         <activity android:name=".HomePage" />
         <activity android:name=".AccountCreated" />
         <activity android:name=".UserSignUp" />
         <activity android:name=".SelectedVideo" />
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".AccountActivity.ResetPasswordActivity"/>
-        <activity android:name=".AccountActivity.SignupActivity"/>
-
+        <activity android:name=".MainActivity" />
+        <activity android:name=".AccountActivity.ResetPasswordActivity" />
+        <activity android:name=".AccountActivity.SignupActivity" />
         <activity
             android:name=".FullscreenVideo"
             android:configChanges="orientation|keyboardHidden|screenSize"

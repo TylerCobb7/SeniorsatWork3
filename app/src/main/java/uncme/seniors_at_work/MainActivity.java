@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView email;
     private EditText oldEmail, password, newPassword;
     private ProgressBar progressBar;
-    private FirebaseAuth auth;
+    public FirebaseAuth auth;
 
 
     @Override
