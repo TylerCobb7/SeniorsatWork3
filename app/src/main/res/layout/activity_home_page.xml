@@ -21,11 +21,19 @@
             android:text="New"
              />
 
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:src="@drawable/settings"
+            android:scaleType="fitCenter"
+            android:id="@+id/settings_button"/>
+
         <Button
             android:id="@+id/topButton"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="210dp"
+            android:layout_marginLeft="50dp"
             android:text="Top"
         />
 
@@ -53,7 +61,7 @@
                 android:layout_height="60dp"
                 android:layout_marginLeft="4dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/downvote" />
+                android:src="@drawable/profile" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -122,7 +130,6 @@
         <FrameLayout
             android:layout_width="400dp"
             android:layout_height="match_parent">
-
             <VideoView
                 android:id="@+id/post_video"
                 android:layout_width="match_parent"
@@ -138,19 +145,19 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="80dp"
                 android:onClick="videoSelected"
-                android:src="@android:drawable/ic_media_play"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:src="@android:drawable/ic_media_play" />
 
         </FrameLayout>
 
 
         <LinearLayout
-            android:id="@+id/vote_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/vote_layout">
 
             <ImageButton
                 android:id="@+id/upvoteButton"
@@ -182,21 +189,13 @@
                 android:id="@+id/commentPathway"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="120dp"
+                android:layout_marginLeft="153dp"
                 android:baselineAlignBottom="false"
                 android:onClick="commentPathway"
-                android:src="@drawable/downvote"
+                android:src="@drawable/comment"
                 android:text="Comments" />
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/settings_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Settings" />
     </LinearLayout>
-
-
 </RelativeLayout>
 
