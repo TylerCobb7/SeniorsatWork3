@@ -17,4 +17,9 @@
         android:layout_height="wrap_content"
         android:contentDescription="Take image of picture" />
 
+    <EditText
+        android:id="@+id/write_on_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>
