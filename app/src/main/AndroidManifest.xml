@@ -14,6 +14,10 @@
         <activity android:name=".AccountCreated" />
         <activity android:name=".UserSignUp" />
         <activity android:name=".SelectedVideo" />
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".AccountActivity.ResetPasswordActivity"/>
+        <activity android:name=".AccountActivity.SignupActivity"/>
+
         <activity
             android:name=".FullscreenVideo"
             android:configChanges="orientation|keyboardHidden|screenSize"
