@@ -21,11 +21,19 @@
             android:text="New"
              />
 
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:src="@drawable/settings"
+            android:scaleType="fitCenter"
+            android:id="@+id/settings_button"/>
+
         <Button
             android:id="@+id/topButton"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="210dp"
+            android:layout_marginLeft="50dp"
             android:text="Top"
         />
 
@@ -53,7 +61,7 @@
                 android:layout_height="60dp"
                 android:layout_marginLeft="4dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/downvote" />
+                android:src="@drawable/profile" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -182,19 +190,10 @@
                 android:layout_marginLeft="120dp"
                 android:baselineAlignBottom="false"
                 android:onClick="commentPathway"
-                android:src="@drawable/downvote"
+                android:src="@drawable/comment"
                 android:text="Comments" />
 
         </LinearLayout>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Settings"
-                android:id="@+id/settings_button"
-                />
-        </LinearLayout>
-
-
+    </LinearLayout>
 </RelativeLayout>
 
