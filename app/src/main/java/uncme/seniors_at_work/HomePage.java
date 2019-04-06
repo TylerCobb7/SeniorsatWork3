@@ -76,9 +76,7 @@ public class HomePage extends AppCompatActivity {
 
         //functionality for account settings button
 
-
         //Navigation
-
         drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         View navView = navigationView.inflateHeaderView(R.layout.navigation_header);
@@ -106,8 +104,10 @@ public class HomePage extends AppCompatActivity {
                 break;
 
             case R.id.nav_settings:
-                intent = new Intent(HomePage.this, MainActivity.class);
+                intent = new Intent(HomePage.this, EditAccountSettingsActivity.class);
                 intent.putExtra(SERIALIZE_DATA, user);
+                drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
+                drawerLayout.closeDrawers();
                 startActivity(intent);
                 break;
 
@@ -182,37 +182,5 @@ public class HomePage extends AppCompatActivity {
 
             }
         });
-
-    /* ********old code*********
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        mConditionRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String upvoteCounter = dataSnapshot.getValue(String.class);
-                sVoteCondition.setText(upvoteCounter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        sUpvoteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mConditionRef.setValue("1");
-            }
-        });
-        sDownvoteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mConditionRef.setValue("-1");
-            }
-        }); */
-
     }
-
 }

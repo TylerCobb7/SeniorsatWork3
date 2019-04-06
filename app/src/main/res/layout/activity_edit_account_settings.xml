@@ -20,7 +20,7 @@
 
     <EditText
         android:id="@+id/edit_text_userName"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="Username"
@@ -30,7 +30,7 @@
 
     <EditText
         android:id="@+id/edit_text_firstName"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="First Name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
 
     <EditText
         android:id="@+id/edit_text_lastName"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Last Name"
         app:layout_constraintEnd_toEndOf="parent"

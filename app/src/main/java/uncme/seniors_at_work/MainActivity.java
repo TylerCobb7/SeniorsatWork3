@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         email = (TextView) findViewById(R.id.useremail);
 
         //get current user
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser user = auth.getCurrentUser();
 
         setDataToView(user);
 
@@ -59,26 +59,19 @@ public class MainActivity extends AppCompatActivity {
 
 
         btnChangePassword = (Button) findViewById(R.id.change_password_button);
-
         btnRemoveUser = (Button) findViewById(R.id.remove_user_button);
-
         changePassword = (Button) findViewById(R.id.changePass);
-
         remove = (Button) findViewById(R.id.remove);
         signOut = (Button) findViewById(R.id.sign_out);
 
         oldEmail = (EditText) findViewById(R.id.old_email);
-
         password = (EditText) findViewById(R.id.password);
         newPassword = (EditText) findViewById(R.id.newPassword);
 
         oldEmail.setVisibility(View.GONE);
-
         password.setVisibility(View.GONE);
         newPassword.setVisibility(View.GONE);
-
         changePassword.setVisibility(View.GONE);
-
         remove.setVisibility(View.GONE);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -92,12 +85,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 oldEmail.setVisibility(View.GONE);
-
                 password.setVisibility(View.GONE);
                 newPassword.setVisibility(View.VISIBLE);
-
                 changePassword.setVisibility(View.VISIBLE);
-
                 remove.setVisibility(View.GONE);
             }
         });
@@ -169,10 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
-
         email.setText("User Email: " + user.getEmail());
-
-
     }
 
     // this listener will be called when there is change in firebase user session
