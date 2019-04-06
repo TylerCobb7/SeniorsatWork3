@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import uncme.seniors_at_work.AccountActivity.LoginActivity;
 import uncme.seniors_at_work.AccountActivity.SignupActivity;
 
@@ -39,6 +41,13 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
     FirebaseUser currentUser;
     DrawerLayout drawerLayout;
     DatabaseReference usersRef;
+    RadioButton btnMale;
+    RadioButton btnFemale;
+    EditText aboutMe;
+    CircleImageView profileImage;
+
+    final static int Gallery_Pick = 1;
+
 
     String currentUserID;
 
@@ -66,6 +75,11 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
         goBackButton = (Button) findViewById(R.id.goback_button);
         saveSettingsButton = (Button) findViewById(R.id.save_settings_button);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
+        btnFemale = (RadioButton)findViewById(R.id.btnFemale);
+        btnMale = (RadioButton)findViewById(R.id.btnMale);
+        aboutMe = (EditText) findViewById(R.id.etAboutMe);
+        profileImage = (CircleImageView) findViewById(R.id.profilePicture);
+
 
         //save settings button grabs all text input in fields, updates the user object
         // and sends user object back to homepage
@@ -73,6 +87,16 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SaveUserInfo();
+            }
+        });
+
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, Gallery_Pick);
             }
         });
 
@@ -117,6 +141,10 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
         String username = editTextUserName.getText().toString();
         String userFirst = editTextFirstName.getText().toString();
         String userLast = editTextLastName.getText().toString();
+        String userMale = btnMale.getText().toString();
+        String userFemale = btnMale.getText().toString();
+        String userAboutMe = aboutMe.getText().toString();
+        String userGender = "";
 
         if(TextUtils.isEmpty(username)){
             Toast.makeText(this, "Username field is empty", Toast.LENGTH_SHORT).show();
@@ -130,31 +158,43 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
             Toast.makeText(this, "Last name field is empty", Toast.LENGTH_SHORT).show();
         }
 
-        if((!(TextUtils.isEmpty(username)) && !(TextUtils.isEmpty(userFirst)) && !(TextUtils.isEmpty(userLast))) == true) {
+        if(TextUtils.isEmpty(userMale) && !(TextUtils.isEmpty(userFemale))){
+            userGender = userFemale;
+        }
+
+        if(!(TextUtils.isEmpty(userMale)) && (TextUtils.isEmpty(userFemale))){
+            userGender = userMale;
+        }
+
+        if((!(TextUtils.isEmpty(username)) && !(TextUtils.isEmpty(userFirst)) && !(TextUtils.isEmpty(userLast))) == true){
 
             progressBar.setVisibility(View.VISIBLE);
 
             //Saves Users information if there is no blank input
+            /*
             user.setUsername(editTextUserName.getText().toString());
             user.setFirstName(editTextFirstName.getText().toString());
             user.setLastName(editTextLastName.getText().toString());
+            */
 
             HashMap userMap = new HashMap();
             userMap.put("username", username);
             userMap.put("userFirst", userFirst);
             userMap.put("userLast", userLast);
-            userMap.put("age", "Male");
-            userMap.put("aboutMe", "Senior at Work");
+            userMap.put("age", userGender);
+            userMap.put("aboutMe", userAboutMe);
             usersRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if(task.isSuccessful()){
-                        SendToProfileActivity();
                         Toast.makeText(EditAccountSettingsActivity.this, "Account Infomation has been saved", Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+                        SendToProfileActivity();
                     }
                     else{
                         String message = task.getException().getMessage();
                         Toast.makeText(EditAccountSettingsActivity.this, "Error occured: " + message, Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
                     }
                 }
             });

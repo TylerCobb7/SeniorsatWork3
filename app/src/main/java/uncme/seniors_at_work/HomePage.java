@@ -20,6 +20,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -64,7 +65,6 @@ public class HomePage extends AppCompatActivity {
         sVoteCondition = (TextView) findViewById(R.id.voteCondition);
         sUpvoteButton = (ImageButton) findViewById(R.id.upvoteButton);
         sDownvoteButton = (ImageButton) findViewById(R.id.downvoteButton);
-
         user = (User) getIntent().getSerializableExtra("serializedata");
 
         //get auth instance
