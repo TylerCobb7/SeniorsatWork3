@@ -10,7 +10,7 @@ buildscript {
     }
     def var = dependencies {
         // Add this line
-        classpath 'com.google.gms:google-services:4.0.0'
+        classpath 'com.google.gms:google-services:4.2.0'
         classpath 'com.android.tools.build:gradle:3.3.2'
 
 
@@ -18,7 +18,7 @@ buildscript {
         // in the individual module build.gradle files
     }
     dependencies {
-        classpath 'com.google.gms:google-services:4.0.0'
+        classpath 'com.google.gms:google-services:4.1.0'
     }
     var
 }

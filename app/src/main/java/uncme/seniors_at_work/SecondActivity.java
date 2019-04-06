@@ -1,8 +1,8 @@
 package uncme.seniors_at_work;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,11 +13,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import uncme.seniors_at_work.FullscreenVideo;
-import uncme.seniors_at_work.MainActivity;
-import uncme.seniors_at_work.R;
-import uncme.seniors_at_work.SelectedVideo;
 
 
 public class SecondActivity extends AppCompatActivity {

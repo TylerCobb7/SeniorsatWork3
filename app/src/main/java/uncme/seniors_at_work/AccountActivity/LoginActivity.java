@@ -2,8 +2,8 @@ package uncme.seniors_at_work.AccountActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +18,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import uncme.seniors_at_work.HomePage;
-import uncme.seniors_at_work.MainActivity;
 import uncme.seniors_at_work.R;
 
 public class LoginActivity extends AppCompatActivity {
