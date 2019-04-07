@@ -62,6 +62,8 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
     EditText aboutMe;
     ImageView profileImage;
     Uri profileImageURI;
+    ImageView navProfileImage;
+    ImageView postProfileImage;
 
     final static int Gallery_Pick = 1;
 
@@ -96,6 +98,9 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
         btnMale = (RadioButton)findViewById(R.id.btnMale);
         aboutMe = (EditText) findViewById(R.id.etAboutMe);
         profileImage = (CircleImageView) findViewById(R.id.profilePicture);
+        navProfileImage = (CircleImageView) findViewById(R.id.nav_profile_image);
+        postProfileImage = (CircleImageView) findViewById(R.id.post_profile_image);
+
 
 
         //save settings button grabs all text input in fields, updates the user object
@@ -123,6 +128,41 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
             {
                 if(dataSnapshot.exists())
                 {
+                    if(dataSnapshot.hasChild("username")){
+                        String userName = dataSnapshot.child("username").getValue().toString();
+                        editTextUserName.setText(userName);
+                    }
+
+                    if(dataSnapshot.hasChild("userFirst")){
+                        String userFirst = dataSnapshot.child("userFirst").getValue().toString();
+                        editTextFirstName.setText(userFirst);
+                    }
+
+                    if(dataSnapshot.hasChild("userLast")){
+                        String userlast = dataSnapshot.child("userLast").getValue().toString();
+                        editTextLastName.setText(userlast);
+                    }
+
+                    if(dataSnapshot.hasChild("gender")){
+                        String userGender = dataSnapshot.child("gender").getValue().toString();
+                        if(userGender.equals("Male")){
+                            btnMale.setChecked(true);
+                        }
+
+                        if(userGender.equals("Female")){
+                            btnFemale.setChecked(true);
+                        }
+
+                        if(userGender.equals("")){
+                            Toast.makeText(EditAccountSettingsActivity.this, "Please choose a gender..", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    if(dataSnapshot.hasChild("aboutMe")){
+                        String userAboutMe = dataSnapshot.child("aboutMe").getValue().toString();
+                        aboutMe.setText(userAboutMe);
+                    }
+
                     if (dataSnapshot.hasChild("profileImage"))
                     {
 
@@ -217,45 +257,8 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
                                 startActivity(setUpIntent);
                             }
                         });
-
                     }
                 });
-
-
-
-
-
-                /*
-                filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                      @Override
-                      public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(EditAccountSettingsActivity.this, "Profile Image stored successfuly to Firebase Storage..", Toast.LENGTH_SHORT).show();
-
-                                final String downloadUrl = task.getResult().getStorage().getDownloadUrl().toString();
-
-                                usersRef.child("profileImage").setValue(downloadUrl)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Intent setUpIntent = new Intent(EditAccountSettingsActivity.this, EditAccountSettingsActivity.class);
-                                            startActivity(setUpIntent);
-
-                                            Toast.makeText(EditAccountSettingsActivity.this, "Profile Image stored to Firebase Database Successfullly", Toast.LENGTH_SHORT).show();
-                                            progressBar.setVisibility(View.GONE);
-                                        }
-                                        else{
-                                            String message = task.getException().getMessage();
-                                            Toast.makeText(EditAccountSettingsActivity.this, "Error occured: " + message, Toast.LENGTH_SHORT).show();
-                                            progressBar.setVisibility(View.GONE);
-                                        }
-                                    }
-                                });
-                            }
-                      }
-                  }
-                );*/
             }
             else{
                 Toast.makeText(EditAccountSettingsActivity.this, "Error Occured: Image can not be cropped. Try again", Toast.LENGTH_SHORT).show();
@@ -270,8 +273,8 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
         String username = editTextUserName.getText().toString();
         String userFirst = editTextFirstName.getText().toString();
         String userLast = editTextLastName.getText().toString();
-        String userMale = btnMale.getText().toString();
-        String userFemale = btnMale.getText().toString();
+        Boolean userMale = btnMale.isChecked();
+        Boolean userFemale = btnFemale.isChecked();
         String userAboutMe = aboutMe.getText().toString();
         String userGender = "";
 
@@ -287,12 +290,12 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
             Toast.makeText(this, "Last name field is empty", Toast.LENGTH_SHORT).show();
         }
 
-        if(TextUtils.isEmpty(userMale) && !(TextUtils.isEmpty(userFemale))){
-            userGender = userFemale;
+        if(userMale){
+            userGender = "Male";
         }
 
-        if(!(TextUtils.isEmpty(userMale)) && (TextUtils.isEmpty(userFemale))){
-            userGender = userMale;
+        if(userFemale){
+            userGender = "Female";
         }
 
         if((!(TextUtils.isEmpty(username)) && !(TextUtils.isEmpty(userFirst)) && !(TextUtils.isEmpty(userLast))) == true){
@@ -310,7 +313,7 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
             userMap.put("username", username);
             userMap.put("userFirst", userFirst);
             userMap.put("userLast", userLast);
-            userMap.put("age", userGender);
+            userMap.put("gender", userGender);
             userMap.put("aboutMe", userAboutMe);
             usersRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override

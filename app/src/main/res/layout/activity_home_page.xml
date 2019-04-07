@@ -9,7 +9,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        />
 
         <RelativeLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,13 +34,21 @@
                     android:text="New"
                      />
 
+                <ImageButton
+                    android:id="@+id/add_new_post_button"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="47dp"
+                    android:background="@color/btn_logut_bg"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/add_post_high" />
 
                 <Button
                     android:id="@+id/topButton"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="185dp"
                     android:text="Top"
+                    android:layout_marginLeft="47dp"
                 />
 
             </LinearLayout>
