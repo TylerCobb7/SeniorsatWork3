@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import uncme.seniors_at_work.Home;
 import uncme.seniors_at_work.HomePage;
 import uncme.seniors_at_work.R;
 
@@ -91,7 +92,7 @@ public class SignupActivity extends AppCompatActivity {
                                     Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    startActivity(new Intent(SignupActivity.this, HomePage.class));
+                                    startActivity(new Intent(SignupActivity.this, Home.class));
                                     finish();
                                 }
                             }

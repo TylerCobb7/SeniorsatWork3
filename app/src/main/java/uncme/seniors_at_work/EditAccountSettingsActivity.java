@@ -186,7 +186,7 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
         goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(EditAccountSettingsActivity.this, HomePage.class);
+                Intent i = new Intent(EditAccountSettingsActivity.this, Home.class);
                 startActivity(i);
             }
         });
@@ -332,7 +332,7 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
             });
 
             //SendToProfileActivity();
-            Intent i = new Intent(EditAccountSettingsActivity.this, HomePage.class);
+            Intent i = new Intent(EditAccountSettingsActivity.this, Home.class);
             i.putExtra(SERIALIZE_DATA, user);
             startActivity(i);
         }
@@ -340,8 +340,8 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
 
     private void SendToProfileActivity() {
 
-        Intent intent = new Intent(EditAccountSettingsActivity.this, HomePage.class);
-        startActivity(intent);
+        Intent intent = new Intent(EditAccountSettingsActivity.this, Home.class);
+
         finish();
 
     }

@@ -17,6 +17,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import uncme.seniors_at_work.Home;
 import uncme.seniors_at_work.HomePage;
 import uncme.seniors_at_work.R;
 
@@ -37,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, HomePage.class));
+            startActivity(new Intent(LoginActivity.this, Home.class));
             finish();
         }
 
@@ -101,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Intent intent = new Intent(LoginActivity.this, HomePage.class);
+                                    Intent intent = new Intent(LoginActivity.this, Home.class);
                                     startActivity(intent);
                                     finish();
                                 }

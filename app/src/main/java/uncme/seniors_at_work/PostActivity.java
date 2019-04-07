@@ -183,7 +183,7 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void SendUserToMainActivity() {
-        Intent intent = new Intent(PostActivity.this, HomePage.class);
+        Intent intent = new Intent(PostActivity.this, Home.class);
         startActivity(intent);
     }
 
