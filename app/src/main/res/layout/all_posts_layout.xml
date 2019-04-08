@@ -149,7 +149,8 @@
                 android:baselineAlignBottom="false"
                 android:onClick="commentPathway"
                 android:src="@drawable/comment"
-                android:text="Comments" />
+                android:text="Comments"
+                android:background="#ffffff"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

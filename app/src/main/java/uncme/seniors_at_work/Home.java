@@ -162,15 +162,26 @@ public class Home extends AppCompatActivity {
 
     private void DisplayAllUsersPosts() {
         FirebaseRecyclerOptions<Posts> options=new FirebaseRecyclerOptions.Builder<Posts>().setQuery(postsRef,Posts.class).build();
-        FirebaseRecyclerAdapter<Posts, PostsViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<Posts, PostsViewHolder>(options) {
+        FirebaseRecyclerAdapter<Posts, PostsViewHolder> FirebaseRecyclerAdapter=new FirebaseRecyclerAdapter<Posts, PostsViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull PostsViewHolder holder, int position, @NonNull Posts model) {
+                final String PostKey = getRef(position).getKey();
+
                 holder.username.setText(model.getUsername());
                 holder.time.setText(" " + model.getTime());
                 holder.date.setText(" "+ model.getDate());
                 holder.description.setText(model.getDescription());
                 Picasso.get().load(model.getProfileImage()).into(holder.user_post_image);
                 Picasso.get().load(model.getPostImage()).into(holder.postImage);
+
+                holder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent clickPostIntent = new Intent(Home.this, ClickPostActivity.class);
+                        clickPostIntent.putExtra("PostKey", PostKey);
+                        startActivity(clickPostIntent);
+                    }
+                });
 
             }
 
@@ -182,16 +193,19 @@ public class Home extends AppCompatActivity {
                 return viewHolder;
             }
         };
-        postList.setAdapter(firebaseRecyclerAdapter);
-        firebaseRecyclerAdapter.startListening();
+        postList.setAdapter(FirebaseRecyclerAdapter);
+        FirebaseRecyclerAdapter.startListening();
     }
 
     public static class PostsViewHolder extends RecyclerView.ViewHolder{
         TextView username,date,time,description;
         CircleImageView user_post_image;
         ImageView postImage;
+        View mView;
+
         public PostsViewHolder(View itemView) {
             super(itemView);
+            mView = itemView;
 
             username=itemView.findViewById(R.id.post_user_name);
             date=itemView.findViewById(R.id.post_date);
