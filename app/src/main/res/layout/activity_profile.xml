@@ -7,13 +7,10 @@
     android:background="@color/colorProfile"
     tools:context=".ProfileActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/top_container">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/my_profile_pic"
@@ -51,8 +48,28 @@
                 android:textSize="20sp"
                 android:textStyle="bold"/>
 
+            <TextView
+                android:id="@+id/my_Posts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My Posts"
+                android:layout_below="@+id/my_profile_status"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/only_users_post_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignStart="@+id/my_Posts"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            </androidx.recyclerview.widget.RecyclerView>
 
 
         </RelativeLayout>
-    </ScrollView>
 </RelativeLayout>
