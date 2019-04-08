@@ -93,7 +93,7 @@ public class Home extends AppCompatActivity {
 
         drawerLayout.addDrawerListener(actionBarToggle);
         actionBarToggle.syncState();
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
         postList = (RecyclerView) findViewById(R.id.all_users_post_list);
@@ -230,6 +230,12 @@ public class Home extends AppCompatActivity {
 
     }
 
+    private void SendUserToProfileActivity() {
+        Intent intent = new Intent(Home.this, ProfileActivity.class);
+        startActivity(intent);
+
+    }
+
     public void signOut(){
         auth.signOut();
     }
@@ -241,7 +247,7 @@ public class Home extends AppCompatActivity {
                 break;
 
             case R.id.nav_profile:
-                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+                SendUserToProfileActivity();
                 break;
 
             case R.id.nav_home:
