@@ -99,7 +99,7 @@ public class Home extends AppCompatActivity {
         postList = (RecyclerView) findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setReverseLayout(false);
         linearLayoutManager.setStackFromEnd(true);
         postList.setLayoutManager(linearLayoutManager);
 
