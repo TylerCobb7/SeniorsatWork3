@@ -79,7 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
         userPostList = (RecyclerView) findViewById(R.id.only_users_post_list);
         userPostList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(false);
+        linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         userPostList.setLayoutManager(linearLayoutManager);
 
