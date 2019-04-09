@@ -118,39 +118,34 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/upvoteButton"
+                android:id="@+id/likeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:src="@drawable/blueupvote" />
+                android:src="@drawable/like" />
 
             <TextView
-                android:id="@+id/voteCondition"
+                android:id="@+id/number_Of_Likes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:text="0 Likes"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textSize="14sp"
                 android:inputType="numberSigned" />
 
-            <ImageButton
-                android:id="@+id/downvoteButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:src="@drawable/bluedownvote" />
+
 
             <ImageButton
-                android:id="@+id/commentPathway"
+                android:id="@+id/commentButton"
                 android:layout_width="99dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="160dp"
+                android:layout_marginLeft="190dp"
                 android:background="@null"
                 android:baselineAlignBottom="false"
                 android:onClick="commentPathway"
-                android:src="@drawable/comment"
-                android:text="Comments" />
+                android:src="@drawable/comment" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
