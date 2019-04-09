@@ -148,7 +148,7 @@ public class CommentsActivity extends AppCompatActivity {
 
         public void setTime(String time){
             TextView myTime = (TextView) mView.findViewById(R.id.comment_time);
-            myTime.setText("  Date: " + time);
+            myTime.setText("  Time: " + time);
         }
 
     }
