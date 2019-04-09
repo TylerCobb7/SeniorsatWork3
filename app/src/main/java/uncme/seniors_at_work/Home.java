@@ -44,11 +44,8 @@ public class Home extends AppCompatActivity {
     private Toolbar mToolbar;
 
     String SERIALIZE_DATA = "serializedata";
-    ImageButton sUpvoteButton;
-    ImageButton sDownvoteButton;
     TextView sVoteCondition;
     TextView postUserName;
-    ImageButton settingsButton;
     int reddit;
     User user;
     Intent intent;
@@ -183,6 +180,15 @@ public class Home extends AppCompatActivity {
                         Intent clickPostIntent = new Intent(Home.this, ClickPostActivity.class);
                         clickPostIntent.putExtra("PostKey", PostKey);
                         startActivity(clickPostIntent);
+                    }
+                });
+
+                holder.commentButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent commentsIntent = new Intent(Home.this, CommentsActivity.class);
+                        commentsIntent.putExtra("PostKey", PostKey);
+                        startActivity(commentsIntent);
                     }
                 });
 
