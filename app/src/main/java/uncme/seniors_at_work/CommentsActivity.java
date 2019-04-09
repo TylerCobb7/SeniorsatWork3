@@ -176,7 +176,7 @@ public class CommentsActivity extends AppCompatActivity {
                 commentsMap.put("date", saveCurrentDate);
                 commentsMap.put("time", saveCurrentTime);
                 commentsMap.put("username", userName);
-                commentsMap.put("image", image);
+                commentsMap.put("profileImage", image);
             postsRef.child(RandomKey).updateChildren(commentsMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
