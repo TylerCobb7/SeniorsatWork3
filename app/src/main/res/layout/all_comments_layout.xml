@@ -17,6 +17,13 @@
             android:orientation="horizontal"
             android:layout_margin="10dp">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/comment_profileImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/profile"
+                android:scaleType="centerCrop"/>
+
             <TextView
                 android:id="@+id/comment_user_name"
                 android:layout_width="wrap_content"
@@ -30,7 +37,7 @@
                 android:id="@+id/simple_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="commnted on"
+                android:text="commented on"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp"
                 android:textStyle="bold"/>
