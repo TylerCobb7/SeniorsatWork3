@@ -54,9 +54,10 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
     Button deleteAccountButton;
     FirebaseAuth userAuth;
     FirebaseUser currentUser;
+    DatabaseReference usersRef;
+    String currentUserID;
     StorageReference UserProfileImageRef;
     DrawerLayout drawerLayout;
-    DatabaseReference usersRef;
     RadioButton btnMale;
     RadioButton btnFemale;
     EditText aboutMe;
@@ -67,7 +68,6 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
 
     final static int Gallery_Pick = 1;
 
-    String currentUserID;
 
     private ProgressBar progressBar;
 
@@ -78,7 +78,6 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
 
         userAuth = FirebaseAuth.getInstance();
         currentUser = userAuth.getCurrentUser();
-        usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         currentUserID = userAuth.getCurrentUser().getUid();
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
         UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("profile Images");
@@ -339,10 +338,7 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
     }
 
     private void SendToProfileActivity() {
-
         Intent intent = new Intent(EditAccountSettingsActivity.this, Home.class);
-
         finish();
-
     }
 }

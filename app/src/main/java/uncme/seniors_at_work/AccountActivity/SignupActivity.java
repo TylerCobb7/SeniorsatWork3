@@ -15,7 +15,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
+import uncme.seniors_at_work.EditAccountSettingsActivity;
 import uncme.seniors_at_work.Home;
 import uncme.seniors_at_work.HomePage;
 import uncme.seniors_at_work.R;
@@ -26,6 +32,9 @@ public class SignupActivity extends AppCompatActivity {
     private Button btnSignIn, btnSignUp, btnResetPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
+    FirebaseUser currentUser;
+    DatabaseReference usersRef;
+    String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,14 +101,51 @@ public class SignupActivity extends AppCompatActivity {
                                     Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    startActivity(new Intent(SignupActivity.this, Home.class));
-                                    finish();
+                                    auth = FirebaseAuth.getInstance();
+                                    currentUser = auth.getCurrentUser();
+                                    currentUserID = auth.getCurrentUser().getUid();
+                                    usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
+
+
+                                    String username = "None";
+                                    String userFirst = "None";
+                                    String userLast = "None";
+                                    String userGender = "Male";
+                                    String userAboutMe = "None";
+                                    String userProfileImage = "https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/profile%20Images%2Fprofile.png?alt=media&token=f367aa11-c7b5-40eb-a663-fae9074faecf";
+
+                                    HashMap userMap = new HashMap();
+                                    userMap.put("aboutMe", userAboutMe);
+                                    userMap.put("gender", userGender);
+                                    userMap.put("profileImage", userProfileImage);
+                                    userMap.put("userFirst", userFirst);
+                                    userMap.put("userLast", userLast);
+                                    userMap.put("username", username);
+                                    usersRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
+                                        @Override
+                                        public void onComplete(@NonNull Task task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(SignupActivity.this, "Account has been created", Toast.LENGTH_LONG).show();
+                                                progressBar.setVisibility(View.GONE);
+                                                SendToProfileActivity();
+                                            }
+                                            else{
+                                                String message = task.getException().getMessage();
+                                                Toast.makeText(SignupActivity.this, "Error occured: " + message, Toast.LENGTH_LONG).show();
+                                                progressBar.setVisibility(View.GONE);
+                                            }
+                                        }
+                                    });
                                 }
                             }
                         });
-
             }
         });
+    }
+
+    private void SendToProfileActivity() {
+        Intent intent = new Intent(SignupActivity.this, Home.class);
+        finish();
     }
 
     @Override
