@@ -74,7 +74,7 @@ public class Home extends AppCompatActivity {
         //get auth instance
         auth = FirebaseAuth.getInstance();
 
-        if(auth.getCurrentUser().getUid().equals("1GJsL0PZ3HMU1HK7Wz3U0SkjOrB3")){
+        if(auth.getCurrentUser().getUid().equals("knZTjI9U4qdF8GGEXxPH7VItSdm2")){
             modButton.setVisibility(View.VISIBLE);
         }else
         {

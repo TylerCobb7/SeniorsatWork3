@@ -112,6 +112,7 @@ public class SignupActivity extends AppCompatActivity {
                                     String userLast = "None";
                                     String userGender = "Male";
                                     String userAboutMe = "None";
+                                    String banned = "false";
                                     String userProfileImage = "https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/profile%20Images%2Fprofile.png?alt=media&token=f367aa11-c7b5-40eb-a663-fae9074faecf";
 
                                     HashMap userMap = new HashMap();
@@ -121,6 +122,7 @@ public class SignupActivity extends AppCompatActivity {
                                     userMap.put("userFirst", userFirst);
                                     userMap.put("userLast", userLast);
                                     userMap.put("username", username);
+                                    userMap.put("banned", banned);
                                     usersRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
                                         @Override
                                         public void onComplete(@NonNull Task task) {
