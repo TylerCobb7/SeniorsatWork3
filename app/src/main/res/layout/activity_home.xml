@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawable_layout"
     tools:context=".Home"
-    android:background="@color/mainBackground">
+    android:background="#fffafa">
 
     <RelativeLayout
         android:layout_width="match_parent"
