@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,6 +49,7 @@ public class PostActivity extends AppCompatActivity {
     String current_USER_ID;
     String downloadURL;
     ProgressBar progressBar;
+    RadioButton anonymousBtn;
 
     public static final int Gallery_Pick = 1;
     StorageReference postReferences;
@@ -68,6 +70,7 @@ public class PostActivity extends AppCompatActivity {
         postsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         mAuth = FirebaseAuth.getInstance();
         current_USER_ID = mAuth.getCurrentUser().getUid();
+        anonymousBtn = (RadioButton)findViewById(R.id.anonymous_button);
 
 
 
@@ -95,6 +98,10 @@ public class PostActivity extends AppCompatActivity {
         }
         if(TextUtils.isEmpty(description)){
             Toast.makeText(this, "Post description is empty...", Toast.LENGTH_SHORT).show();
+        }
+        if(anonymousBtn.isChecked()){
+            progressBar.setVisibility(View.VISIBLE);
+            StoringImageToFirebaseStorageAnon();
         }
         else{
             progressBar.setVisibility(View.VISIBLE);
@@ -124,7 +131,49 @@ public class PostActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             downloadURL = uri.toString();
+
                             SavingPostInformationToDatabase(downloadURL);
+                        }
+                    });
+
+                    Toast.makeText(PostActivity.this, "Post has been posted successfully...", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+                else
+                {
+                    String message = task.getException().getMessage();
+                    Toast.makeText(PostActivity.this, "Error occurred: " + message, Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
+
+    }
+
+    private void StoringImageToFirebaseStorageAnon() {
+
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
+        saveCurrentDate = currentDate.format(calForDate.getTime());
+
+        Calendar calForTime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+        saveCurrentTime = currentTime.format(calForTime.getTime());
+        postRandomName = saveCurrentDate + saveCurrentTime;
+
+        final StorageReference filePath = postReferences.child("Post Media").child(imageUri.getLastPathSegment() + postRandomName + ".jpg");
+        progressBar.setVisibility(View.VISIBLE);
+        filePath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            downloadURL = uri.toString();
+
+                            SavingPostInformationToDatabaseAnon(downloadURL);
                         }
                     });
 
@@ -149,6 +198,46 @@ public class PostActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                     String userName = dataSnapshot.child("username").getValue().toString();
                     String userProfileImage = dataSnapshot.child("profileImage").getValue().toString();
+
+                    HashMap postsMap = new HashMap();
+                    postsMap.put("uid", current_USER_ID);
+                    postsMap.put("date", saveCurrentDate);
+                    postsMap.put("time", saveCurrentTime);
+                    postsMap.put("description", description);
+                    postsMap.put("postImage", url);
+                    postsMap.put("profileImage", userProfileImage);
+                    postsMap.put("username", userName);
+
+                    postsRef.child(current_USER_ID + postRandomName).updateChildren(postsMap).addOnCompleteListener(new OnCompleteListener() {
+                        @Override
+                        public void onComplete(@NonNull Task task) {
+                            if(task.isSuccessful()){
+                                SendUserToMainActivity();
+                                Toast.makeText(PostActivity.this, "New post has been posted..", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(PostActivity.this, "Post update failed..", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void SavingPostInformationToDatabaseAnon(final String url) {
+        usersRef.child(current_USER_ID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    String userName = "Anonymous";
+                    String userProfileImage = "https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/profile%20Images%2Fprofile.png?alt=media&token=f367aa11-c7b5-40eb-a663-fae9074faecf";
 
                     HashMap postsMap = new HashMap();
                     postsMap.put("uid", current_USER_ID);
