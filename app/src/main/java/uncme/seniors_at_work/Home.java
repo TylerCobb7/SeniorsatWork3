@@ -25,6 +25,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,10 +44,8 @@ public class Home extends AppCompatActivity {
     private RecyclerView postList;
     private Toolbar mToolbar;
 
-    String SERIALIZE_DATA = "serializedata";
     TextView sVoteCondition;
     TextView postUserName;
-    int reddit;
     User user;
     Intent intent;
     FirebaseAuth auth;
@@ -67,7 +66,6 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        sVoteCondition = (TextView) findViewById(R.id.voteCondition);
         addNewPostButton = (ImageButton) findViewById(R.id.add_new_post_button);
         user = (User) getIntent().getSerializableExtra("serializedata");
         modButton = (ImageButton)findViewById(R.id.modBtn);
