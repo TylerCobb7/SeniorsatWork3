@@ -142,11 +142,23 @@
                 android:id="@+id/commentButton"
                 android:layout_width="99dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="190dp"
+                android:layout_marginLeft="140dp"
                 android:background="@null"
                 android:baselineAlignBottom="false"
                 android:onClick="commentPathway"
                 android:src="@drawable/comment" />
+
+            <ImageButton
+                android:id="@+id/flagButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:padding="3dp"
+                android:background="@null"
+                android:baselineAlignBottom="false"
+                android:onClick="commentPathway"
+                android:scaleType="centerInside"
+                android:src="@drawable/flag" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

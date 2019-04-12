@@ -192,6 +192,15 @@ public class Home extends AppCompatActivity {
                     }
                 });
 
+                holder.flagButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent flagIntent = new Intent(Home.this, FlagActivity.class);
+                        flagIntent.putExtra("Postkey", PostKey);
+                        startActivity(flagIntent);
+                    }
+                });
+
                 holder.likeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -242,6 +251,7 @@ public class Home extends AppCompatActivity {
         ImageButton likeButton;
         TextView displayNumberOfLikes;
         ImageButton commentButton;
+        ImageButton flagButton;
         int countLikes;
         String currentUserID;
         DatabaseReference likesRef;
@@ -259,6 +269,7 @@ public class Home extends AppCompatActivity {
             likeButton = (ImageButton) mView.findViewById(R.id.likeButton);
             displayNumberOfLikes = (TextView) mView.findViewById(R.id.number_Of_Likes);
             commentButton = (ImageButton) mView.findViewById(R.id.commentButton);
+            flagButton = (ImageButton) mView.findViewById(R.id.flagButton);
 
             likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
             currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
