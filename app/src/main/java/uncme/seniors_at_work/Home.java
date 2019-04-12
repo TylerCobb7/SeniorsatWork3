@@ -52,6 +52,7 @@ public class Home extends AppCompatActivity {
     FirebaseAuth auth;
     ImageButton addNewPostButton;
     boolean likeChecker = false;
+    ImageButton modButton;
 
     String currentUserID;
 
@@ -69,9 +70,19 @@ public class Home extends AppCompatActivity {
         sVoteCondition = (TextView) findViewById(R.id.voteCondition);
         addNewPostButton = (ImageButton) findViewById(R.id.add_new_post_button);
         user = (User) getIntent().getSerializableExtra("serializedata");
+        modButton = (ImageButton)findViewById(R.id.modBtn);
+        modButton.setVisibility(View.GONE);
 
         //get auth instance
         auth = FirebaseAuth.getInstance();
+
+        if(auth.getCurrentUser().getUid().equals("1GJsL0PZ3HMU1HK7Wz3U0SkjOrB3")){
+            modButton.setVisibility(View.VISIBLE);
+        }else
+        {
+            modButton.setVisibility(View.GONE);
+        }
+
         currentUserID = auth.getCurrentUser().getUid();
         myRef = FirebaseDatabase.getInstance().getReference().child("Users");
         mConditionRef = FirebaseDatabase.getInstance().getReference().child("VoteScore");
@@ -151,6 +162,13 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SendUserToPostActivity();
+            }
+        });
+
+        modButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendModtoModActivity();
             }
         });
 
@@ -310,6 +328,12 @@ public class Home extends AppCompatActivity {
 
     private void SendUserToPostActivity() {
         Intent intent = new Intent(Home.this, PostActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void SendModtoModActivity() {
+        Intent intent = new Intent(Home.this, ModActivity.class);
         startActivity(intent);
 
     }

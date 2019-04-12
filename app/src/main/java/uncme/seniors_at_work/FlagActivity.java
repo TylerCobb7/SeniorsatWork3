@@ -38,7 +38,6 @@ public class FlagActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         current_user_id = mAuth.getCurrentUser().getUid();
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        postsRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(Post_Key).child("Flagged Videos");
 
         sexBtn = (Button) findViewById(R.id.sexContentBtn);
         violentBtn = (Button)findViewById(R.id.vioRepBtn);
@@ -86,7 +85,7 @@ public class FlagActivity extends AppCompatActivity {
 
 
         final String RandomKey = current_user_id + saveCurrentDate + saveCurrentTime;
-        flagsRef = FirebaseDatabase.getInstance().getReference().child("Flagged Videos").child(info + saveCurrentDate + saveCurrentTime);
+        postsRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(Post_Key).child("Flagged").child(RandomKey);
 
         HashMap flagsMap = new HashMap();
             flagsMap.put("reason", info);
@@ -94,10 +93,16 @@ public class FlagActivity extends AppCompatActivity {
             flagsMap.put("reported post", Post_Key);
             flagsMap.put("date", saveCurrentDate);
             flagsMap.put("time", saveCurrentTime);
-            flagsRef.updateChildren(flagsMap).addOnCompleteListener(new OnCompleteListener() {
+            postsRef.updateChildren(flagsMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if(task.isSuccessful()){
+
+                        postsRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(Post_Key);
+                        HashMap setFlag = new HashMap();
+                        setFlag.put("flagged", "true");
+                        postsRef.updateChildren(setFlag);
+
                         Toast.makeText(FlagActivity.this, "Thank you for letting us know.", Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                         SendToHomeActivity();
@@ -108,9 +113,6 @@ public class FlagActivity extends AppCompatActivity {
                     }
                 }
             });
-
-
-        
     }
 
     private void SendToHomeActivity() {

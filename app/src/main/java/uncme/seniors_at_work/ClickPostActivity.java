@@ -15,13 +15,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.sql.DatabaseMetaData;
+import java.util.HashMap;
 
 public class ClickPostActivity extends AppCompatActivity {
 
@@ -29,7 +36,9 @@ public class ClickPostActivity extends AppCompatActivity {
     TextView postDescription;
     Button postEditButton;
     Button postDeleteButton;
+    Button banUserButton;
     DatabaseReference clickPostRef;
+    DatabaseReference userRef;
     FirebaseAuth mAuth;
 
     String PostKey, currentUserID, databaseUserID, description, image;
@@ -43,14 +52,17 @@ public class ClickPostActivity extends AppCompatActivity {
         clickPostRef = FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
+        userRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         postImage = (ImageView)findViewById(R.id.click_post_image);
         postDescription = (TextView)findViewById(R.id.click_post_description);
         postEditButton = (Button)findViewById(R.id.edit_post_button);
         postDeleteButton = (Button)findViewById(R.id.delete_post_button);
+        banUserButton = (Button)findViewById(R.id.ban_user_button);
 
         postDeleteButton.setVisibility(View.INVISIBLE);
         postEditButton.setVisibility(View.INVISIBLE);
+        banUserButton.setVisibility(View.INVISIBLE);
 
         clickPostRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -64,9 +76,12 @@ public class ClickPostActivity extends AppCompatActivity {
                     postDescription.setText(description);
                     Picasso.get().load(image).into(postImage);
 
-                    if(currentUserID.equals(databaseUserID)){
+                    if(currentUserID.equals(databaseUserID) || currentUserID.equals("1GJsL0PZ3HMU1HK7Wz3U0SkjOrB3")){
                         postDeleteButton.setVisibility(View.VISIBLE);
                         postEditButton.setVisibility(View.VISIBLE);
+                        if(currentUserID.equals("1GJsL0PZ3HMU1HK7Wz3U0SkjOrB3")){
+                            banUserButton.setVisibility(View.VISIBLE);
+                        }
                     }
 
                     postEditButton.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +106,35 @@ public class ClickPostActivity extends AppCompatActivity {
             }
         });
 
+        banUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BanPostUser();
+            }
+        });
 
+
+
+
+    }
+
+    private void BanPostUser() {
+        String user = PostKey;
+        String substring = user.substring(0, 28);
+        HashMap bannedMap = new HashMap();
+        bannedMap.put("banned", "true");
+        userRef.child(substring).updateChildren(bannedMap).addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if(task.isSuccessful()){
+                    finish();
+                }
+                else{
+                    String message = task.getException().getMessage();
+                    Toast.makeText(ClickPostActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
 
     }
