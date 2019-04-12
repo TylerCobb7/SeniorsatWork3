@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,10 +26,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -55,6 +58,7 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
     FirebaseAuth userAuth;
     FirebaseUser currentUser;
     DatabaseReference usersRef;
+    DatabaseReference postRef;
     String currentUserID;
     StorageReference UserProfileImageRef;
     DrawerLayout drawerLayout;
@@ -80,6 +84,7 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
         currentUser = userAuth.getCurrentUser();
         currentUserID = userAuth.getCurrentUser().getUid();
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
+        postRef = FirebaseDatabase.getInstance().getReference("Posts");
         UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("profile Images");
         progressBar = new ProgressBar(this);
 
@@ -197,6 +202,39 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
                 if (currentUser != null) {
+                    usersRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Query query = postRef.orderByChild("uid").equalTo(currentUserID);
+                            query.addChildEventListener(new ChildEventListener() {
+                                @Override
+                                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                    dataSnapshot.getRef().setValue(null);
+                                }
+
+                                @Override
+                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                                }
+
+                                @Override
+                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                                }
+
+                                @Override
+                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+                    });
+
                     currentUser.delete()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
