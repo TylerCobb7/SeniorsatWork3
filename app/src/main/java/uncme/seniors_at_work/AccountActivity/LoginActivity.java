@@ -33,6 +33,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        inputEmail = (EditText) findViewById(R.id.email);
+        inputPassword = (EditText) findViewById(R.id.password);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        btnSignup = (Button) findViewById(R.id.btn_signup);
+        btnLogin = (Button) findViewById(R.id.btn_login);
+        btnReset = (Button) findViewById(R.id.btn_reset_password);
 
         //Get Firebase auth instance
         FirebaseApp.initializeApp(this);
@@ -42,17 +48,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, Home.class));
             finish();
         }
-
-        setContentView(R.layout.activity_login);
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        btnSignup = (Button) findViewById(R.id.btn_signup);
-        btnLogin = (Button) findViewById(R.id.btn_login);
-        btnReset = (Button) findViewById(R.id.btn_reset_password);
-
-        //Get Firebase auth instance
-        auth = FirebaseAuth.getInstance();
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,4 +108,3 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 }
-

@@ -81,6 +81,8 @@ public class Home extends AppCompatActivity {
             modButton.setVisibility(View.GONE);
         }
 
+
+
         currentUserID = auth.getCurrentUser().getUid();
         myRef = FirebaseDatabase.getInstance().getReference().child("Users");
         mConditionRef = FirebaseDatabase.getInstance().getReference().child("VoteScore");
