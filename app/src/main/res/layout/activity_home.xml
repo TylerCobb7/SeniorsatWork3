@@ -51,7 +51,19 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_above="@+id/main_container"
-            android:src="@drawable/mod"
+            android:layout_toLeftOf="@+id/add_new_post_button"
+            android:src="@drawable/uploadvideo"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="12dp"
+            android:background="#046A38"
+            android:id="@+id/add_new_video_button"/>
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_above="@+id/main_container"
+            android:src="@drawable/internet"
             android:scaleType="centerCrop"
             android:layout_marginBottom="4dp"
             android:layout_marginRight="12dp"
