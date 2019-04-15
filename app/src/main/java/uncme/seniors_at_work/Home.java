@@ -49,7 +49,7 @@ public class Home extends AppCompatActivity {
     User user;
     Intent intent;
     FirebaseAuth auth;
-    ImageButton addNewPostButton;
+    ImageButton addNewPostButton, addNewVideoPostButton;
     boolean likeChecker = false;
     ImageButton modButton;
 
@@ -70,6 +70,7 @@ public class Home extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("serializedata");
         modButton = (ImageButton)findViewById(R.id.modBtn);
         modButton.setVisibility(View.GONE);
+        addNewVideoPostButton = (ImageButton)findViewById(R.id.add_new_video_button);
 
         //get auth instance
         auth = FirebaseAuth.getInstance();
@@ -169,6 +170,14 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SendModtoModActivity();
+            }
+        });
+
+        addNewVideoPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Home.this, PostVideoActivity.class);
+                startActivity(intent);
             }
         });
 

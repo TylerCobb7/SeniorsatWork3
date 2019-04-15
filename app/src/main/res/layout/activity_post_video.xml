@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/header"
+    tools:context=".PostVideoActivity">
+
+    <VideoView
+        android:id="@+id/userVideo"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/select_image" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Record"
+        android:id="@+id/recordButton"
+        android:layout_below="@+id/progressBar3"
+        android:layout_marginLeft="70dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Upload"
+        android:id="@+id/uploadButton"
+        android:layout_toRightOf="@+id/recordButton"
+        android:layout_below="@+id/progressBar3"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Download"
+        android:id="@+id/downloadButton"
+        android:layout_toRightOf="@+id/uploadButton"
+        android:layout_below="@+id/progressBar3"/>
+
+    <EditText
+        android:id="@+id/postVideoDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="220dp"
+        android:background="#ffffff"
+        android:ems="10"
+        android:hint="Write something this post..."
+        android:inputType="textMultiLine"
+        android:padding="15dp" />
+
+    <Button
+        android:id="@+id/updateVideoButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="107dp"
+        android:layout_marginBottom="100dp"
+        android:background="#ffffff"
+        android:padding="10dp"
+        android:text="Update Post"
+        android:textSize="18dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        android:layout_below="@+id/userVideo" />
+
+    <RadioButton
+        android:id="@+id/anonymous_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="205dp"
+        android:layout_marginBottom="170dp"
+        android:buttonTint="@color/common_google_signin_btn_text_dark_focused" />
+    <ImageView
+        android:id="@+id/icon1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="171dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/anonymous"
+        android:layout_marginLeft="175dp" />
+
+
+</RelativeLayout>

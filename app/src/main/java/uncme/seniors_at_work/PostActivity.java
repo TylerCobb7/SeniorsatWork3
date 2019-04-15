@@ -65,11 +65,11 @@ public class PostActivity extends AppCompatActivity {
         selectPostImage = (ImageButton) findViewById(R.id.postImageButton);
         updatePostButton = (Button) findViewById(R.id.postButton);
         postDescription = (EditText) findViewById(R.id.postImageDescription);
-        postReferences = FirebaseStorage.getInstance().getReference();
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         postsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         mAuth = FirebaseAuth.getInstance();
-        current_USER_ID = mAuth.getCurrentUser().getUid();
+        current_USER_ID = mAuth.getCurrentUser().getUid();postReferences = FirebaseStorage.getInstance().getReference();
+
         anonymousBtn = (RadioButton)findViewById(R.id.anonymous_button);
 
 
