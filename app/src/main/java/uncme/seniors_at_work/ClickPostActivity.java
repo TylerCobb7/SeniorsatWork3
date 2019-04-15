@@ -77,10 +77,10 @@ public class ClickPostActivity extends AppCompatActivity {
                     postDescription.setText(description);
                     Picasso.get().load(image).into(postImage);
 
-                    if(currentUserID.equals(databaseUserID) || currentUserID.equals("1GJsL0PZ3HMU1HK7Wz3U0SkjOrB3")){
+                    if(currentUserID.equals(databaseUserID) || currentUserID.equals("knZTjI9U4qdF8GGEXxPH7VItSdm2")){
                         postDeleteButton.setVisibility(View.VISIBLE);
                         postEditButton.setVisibility(View.VISIBLE);
-                        if(currentUserID.equals("1GJsL0PZ3HMU1HK7Wz3U0SkjOrB3")){
+                        if(currentUserID.equals("knZTjI9U4qdF8GGEXxPH7VItSdm2")){
                             banUserButton.setVisibility(View.VISIBLE);
                         }
                     }
