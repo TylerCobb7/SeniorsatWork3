@@ -76,8 +76,7 @@ public class PostVideoActivity extends AppCompatActivity {
         progressBar = (ProgressBar)findViewById(R.id.progressBar3);
         anonymousBtn = (RadioButton)findViewById(R.id.anonymous_button);
         recordButton = (Button)findViewById(R.id.recordButton);
-        uploadButton = (Button)findViewById(R.id.uploadButton);
-        downloadButton = (Button)findViewById(R.id.downloadButton);
+
         postImage = "https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/Post%20Media%2Fplaybutton.png?alt=media&token=e1ee3158-5b93-405c-b8e1-635e28663af1";
 
         Calendar calForDate = Calendar.getInstance();
@@ -103,12 +102,6 @@ public class PostVideoActivity extends AppCompatActivity {
             }
         });
 
-        uploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                upload(view);
-            }
-        });
 
         updateVideoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,12 +110,6 @@ public class PostVideoActivity extends AppCompatActivity {
             }
         });
 
-        downloadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                download(view);
-            }
-        });
     }
 
     public void upload(View view){
