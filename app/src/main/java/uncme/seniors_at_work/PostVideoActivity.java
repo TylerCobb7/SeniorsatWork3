@@ -5,9 +5,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,11 +19,16 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -28,6 +36,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class PostVideoActivity extends AppCompatActivity {
 
@@ -41,13 +52,15 @@ public class PostVideoActivity extends AppCompatActivity {
     String postRandomName;
     String current_USER_ID;
     String downloadURL;
+    String postImage;
+    String databaseToStoragePull;
     ProgressBar progressBar;
     RadioButton anonymousBtn;
     String uid;
-
     StorageReference postReferences, videoRef;
     DatabaseReference usersRef, postsRef;
     FirebaseAuth mAuth;
+    File localFile;
 
     private static final int REQUEST_CODE = 101;
 
@@ -65,12 +78,23 @@ public class PostVideoActivity extends AppCompatActivity {
         recordButton = (Button)findViewById(R.id.recordButton);
         uploadButton = (Button)findViewById(R.id.uploadButton);
         downloadButton = (Button)findViewById(R.id.downloadButton);
+        postImage = "https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/Post%20Media%2Fplaybutton.png?alt=media&token=e1ee3158-5b93-405c-b8e1-635e28663af1";
+
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
+        saveCurrentDate = currentDate.format(calForDate.getTime());
+
+        Calendar calForTime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+        saveCurrentTime = currentTime.format(calForTime.getTime());
+        postRandomName = saveCurrentDate + saveCurrentTime;
 
         mAuth = FirebaseAuth.getInstance();
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         postsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         uid = mAuth.getUid();
-        videoRef = FirebaseStorage.getInstance().getReference().child("Post Video/").child(uid);
+        databaseToStoragePull = uid + postRandomName;
+        videoRef = FirebaseStorage.getInstance().getReference().child("Post Video/").child(databaseToStoragePull);
 
         recordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +110,13 @@ public class PostVideoActivity extends AppCompatActivity {
             }
         });
 
+        updateVideoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ValidatePostInfo();
+            }
+        });
+
         downloadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +127,7 @@ public class PostVideoActivity extends AppCompatActivity {
 
     public void upload(View view){
         if(videoUri != null){
-            UploadTask uploadTask = videoRef.putFile(videoUri);
+            final UploadTask uploadTask = videoRef.putFile(videoUri);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
@@ -105,6 +136,17 @@ public class PostVideoActivity extends AppCompatActivity {
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    videoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            downloadURL = uri.toString();
+                            if(anonymousBtn.isChecked()) {
+                                SavingPostInformationToDatabaseAnon(downloadURL);
+                            }else{
+                                SavingPostInformationToDatabase(downloadURL);
+                            }
+                        }
+                    });
                     Toast.makeText(PostVideoActivity.this, "Upload complete", Toast.LENGTH_SHORT).show();
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -116,6 +158,109 @@ public class PostVideoActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "Nothing to upload", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void ValidatePostInfo() {
+        description = videoDescription.getText().toString();
+
+        if(videoUri == null){
+            Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show();
+        }
+        if(TextUtils.isEmpty(description)){
+            Toast.makeText(this, "Post description is empty...", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            upload(view);
+        }
+    }
+
+    private void SavingPostInformationToDatabaseAnon(final String downloadURL) {
+        usersRef.child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    String userName = "Anonymous";
+                    String userProfileImage = "https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/profile%20Images%2Fprofile.png?alt=media&token=f367aa11-c7b5-40eb-a663-fae9074faecf";
+
+                    HashMap postsMap = new HashMap();
+                    postsMap.put("uid", current_USER_ID);
+                    postsMap.put("date", saveCurrentDate);
+                    postsMap.put("time", saveCurrentTime);
+                    postsMap.put("description", description);
+                    postsMap.put("postImage", postImage);
+                    postsMap.put("videoImage", downloadURL);
+                    postsMap.put("storageKey", databaseToStoragePull);
+                    postsMap.put("profileImage", userProfileImage);
+                    postsMap.put("username", userName);
+
+                    postsRef.child(uid + postRandomName).updateChildren(postsMap).addOnCompleteListener(new OnCompleteListener() {
+                        @Override
+                        public void onComplete(@NonNull Task task) {
+                            if(task.isSuccessful()){
+                                SendUserToMainActivity();
+                                Toast.makeText(PostVideoActivity.this, "New post has been posted..", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(PostVideoActivity.this, "Post update failed..", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void SavingPostInformationToDatabase(final String downloadURL) {
+        usersRef.child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               if(dataSnapshot.exists()){
+                   String userName = dataSnapshot.child("username").getValue().toString();
+                   String userProfileImage = dataSnapshot.child("profileImage").getValue().toString();
+
+                   HashMap postsMap = new HashMap();
+                   postsMap.put("uid", uid);
+                   postsMap.put("date", saveCurrentDate);
+                   postsMap.put("time", saveCurrentTime);
+                   postsMap.put("description", description);
+                   postsMap.put("postImage", postImage);
+                   postsMap.put("storageKey", databaseToStoragePull);
+                   postsMap.put("postVideo", downloadURL);
+                   postsMap.put("profileImage", userProfileImage);
+                   postsMap.put("username", userName);
+
+                   postsRef.child(uid + postRandomName).updateChildren(postsMap).addOnCompleteListener(new OnCompleteListener() {
+                       @Override
+                       public void onComplete(@NonNull Task task) {
+                           if(task.isSuccessful()){
+                               SendUserToMainActivity();
+                               Toast.makeText(PostVideoActivity.this, "New post has been posted..", Toast.LENGTH_SHORT).show();
+                           }
+                           else
+                           {
+                               Toast.makeText(PostVideoActivity.this, "Post update failed..", Toast.LENGTH_SHORT).show();
+                           }
+                       }
+                   });
+               }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void SendUserToMainActivity() {
+        Intent intent = new Intent(PostVideoActivity.this, Home.class);
+        startActivity(intent);
     }
 
     public void updateProgress(UploadTask.TaskSnapshot taskSnapshot){
@@ -134,7 +279,7 @@ public class PostVideoActivity extends AppCompatActivity {
 
     public void download(View view){
         try{
-            final File localFile = File.createTempFile("userVideo", "mp4");
+            localFile = File.createTempFile("userVideo", "mp4");
 
             videoRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override

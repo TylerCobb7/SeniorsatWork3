@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserInfo;
@@ -26,8 +30,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.core.UserWriteRecord;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.sql.DatabaseMetaData;
 import java.util.HashMap;
 
@@ -41,6 +49,10 @@ public class ClickPostActivity extends AppCompatActivity {
     DatabaseReference clickPostRef;
     DatabaseReference userRef;
     FirebaseAuth mAuth;
+    File localFile;
+    VideoView postVideo;
+    String videoAddress;
+    DatabaseReference getVideoAddress;
 
     String PostKey, currentUserID, databaseUserID, description, image;
 
@@ -56,6 +68,7 @@ public class ClickPostActivity extends AppCompatActivity {
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         postImage = (ImageView)findViewById(R.id.click_post_image);
+        postVideo = (VideoView)findViewById(R.id.click_post_video);
         postDescription = (TextView)findViewById(R.id.click_post_description);
         postEditButton = (Button)findViewById(R.id.edit_post_button);
         postDeleteButton = (Button)findViewById(R.id.delete_post_button);
@@ -75,7 +88,15 @@ public class ClickPostActivity extends AppCompatActivity {
 
 
                     postDescription.setText(description);
-                    Picasso.get().load(image).into(postImage);
+                    if(image.equals("https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/Post%20Media%2Fplaybutton.png?alt=media&token=e1ee3158-5b93-405c-b8e1-635e28663af1")) {
+                        postImage.setVisibility(View.GONE);
+                        postVideo.setVisibility(View.VISIBLE);
+                        download(postVideo);
+                    }else{
+                        postImage.setVisibility(View.VISIBLE);
+                        postVideo.setVisibility(View.GONE);
+                        Picasso.get().load(image).into(postImage);
+                    }
 
                     if(currentUserID.equals(databaseUserID) || currentUserID.equals("knZTjI9U4qdF8GGEXxPH7VItSdm2")){
                         postDeleteButton.setVisibility(View.VISIBLE);
@@ -117,6 +138,31 @@ public class ClickPostActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void download(View view){
+        try{
+            localFile = File.createTempFile("uservideo", "mp4");
+
+            StorageReference videoRef = FirebaseStorage.getInstance().getReference("Post Video/").child(PostKey);
+            videoRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(ClickPostActivity.this, "Download Complete", Toast.LENGTH_SHORT).show();
+
+                    final VideoView videoView = (VideoView)findViewById(R.id.click_post_video);
+                    videoView.setVideoURI(Uri.fromFile(localFile));
+                    videoView.start();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(ClickPostActivity.this, "Download failed: " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }catch (Exception e){
+            Toast.makeText(this, "Failed to create temp file: " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void BanPostUser() {
