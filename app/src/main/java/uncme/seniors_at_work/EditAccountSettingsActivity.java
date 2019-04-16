@@ -47,8 +47,6 @@ import uncme.seniors_at_work.AccountActivity.SignupActivity;
 
 public class EditAccountSettingsActivity extends AppCompatActivity {
 
-    String SERIALIZE_DATA = "user";
-    User user;
     EditText editTextUserName;
     EditText editTextFirstName;
     EditText editTextLastName;
@@ -87,9 +85,6 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
         postRef = FirebaseDatabase.getInstance().getReference("Posts");
         UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("profile Images");
         progressBar = new ProgressBar(this);
-
-
-        user  = (User) getIntent().getSerializableExtra("serializedata");
 
         editTextFirstName = (EditText) findViewById(R.id.edit_text_firstName);
         editTextLastName = (EditText) findViewById(R.id.edit_text_lastName);
@@ -370,7 +365,6 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
 
             //SendToProfileActivity();
             Intent i = new Intent(EditAccountSettingsActivity.this, Home.class);
-            i.putExtra(SERIALIZE_DATA, user);
             startActivity(i);
         }
     }

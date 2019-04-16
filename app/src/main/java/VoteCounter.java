@@ -1,4 +1,3 @@
-import uncme.seniors_at_work.SecondActivity;
 /*
 public class VoteCounter extends SecondActivity {
     ImageButton sUpvoteButton;

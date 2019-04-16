@@ -35,7 +35,6 @@ public class ModActivity extends AppCompatActivity {
     ImageButton sDownvoteButton;
     TextView sVoteCondition;
     TextView postUserName;
-    User user;
     Intent intent;
     FirebaseAuth auth;
     String currentUserID;

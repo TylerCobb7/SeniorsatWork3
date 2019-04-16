@@ -45,8 +45,6 @@ public class Home extends AppCompatActivity {
     private Toolbar mToolbar;
 
     TextView sVoteCondition;
-    TextView postUserName;
-    User user;
     Intent intent;
     FirebaseAuth auth;
     ImageButton addNewPostButton, addNewVideoPostButton;
@@ -67,7 +65,6 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         addNewPostButton = (ImageButton) findViewById(R.id.add_new_post_button);
-        user = (User) getIntent().getSerializableExtra("serializedata");
         modButton = (ImageButton)findViewById(R.id.modBtn);
         modButton.setVisibility(View.GONE);
         addNewVideoPostButton = (ImageButton)findViewById(R.id.add_new_video_button);
@@ -91,8 +88,6 @@ public class Home extends AppCompatActivity {
         likesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
 
 
-        //get the user name text view and put the username of the user in it
-        postUserName = findViewById(R.id.post_user_name);
 
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);

@@ -21,9 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-import uncme.seniors_at_work.EditAccountSettingsActivity;
 import uncme.seniors_at_work.Home;
-import uncme.seniors_at_work.HomePage;
 import uncme.seniors_at_work.R;
 
 public class SignupActivity extends AppCompatActivity {

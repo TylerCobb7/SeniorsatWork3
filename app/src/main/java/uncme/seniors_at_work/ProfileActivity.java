@@ -41,7 +41,6 @@ public class ProfileActivity extends AppCompatActivity {
     ImageButton sDownvoteButton;
     TextView sVoteCondition;
     TextView postUserName;
-    User user;
     Intent intent;
     FirebaseAuth auth;
     String currentUserID;
@@ -61,7 +60,6 @@ public class ProfileActivity extends AppCompatActivity {
         sDownvoteButton = (ImageButton) findViewById(R.id.downvoteButton);
         NavProfileImage = (CircleImageView) findViewById(R.id.my_profile_pic);
         NavProfileName = (TextView) findViewById(R.id.my_profile_username);
-        user = (User) getIntent().getSerializableExtra("serializedata");
 
         //get auth instance
         auth = FirebaseAuth.getInstance();
