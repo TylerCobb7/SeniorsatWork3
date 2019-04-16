@@ -51,8 +51,6 @@ public class ClickPostActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     File localFile;
     VideoView postVideo;
-    String videoAddress;
-    DatabaseReference getVideoAddress;
 
     String PostKey, currentUserID, databaseUserID, description, image;
 

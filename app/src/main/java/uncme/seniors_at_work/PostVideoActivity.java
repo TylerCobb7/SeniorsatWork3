@@ -170,7 +170,7 @@ public class PostVideoActivity extends AppCompatActivity {
                     String userProfileImage = "https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/profile%20Images%2Fprofile.png?alt=media&token=f367aa11-c7b5-40eb-a663-fae9074faecf";
 
                     HashMap postsMap = new HashMap();
-                    postsMap.put("uid", current_USER_ID);
+                    postsMap.put("uid", uid);
                     postsMap.put("date", saveCurrentDate);
                     postsMap.put("time", saveCurrentTime);
                     postsMap.put("description", description);
