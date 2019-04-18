@@ -261,7 +261,9 @@ public class PostVideoActivity extends AppCompatActivity {
 
     public void record(View view){
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-        startActivityForResult(intent, REQUEST_CODE);
+        if(intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, REQUEST_CODE);
+        }
     }
 
     public void download(View view){
