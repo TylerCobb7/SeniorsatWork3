@@ -123,6 +123,7 @@ public class Home extends AppCompatActivity {
         });
 
 
+        //Takes user id and checks if datasnapshot exist for profileimage
         myRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -154,6 +155,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        //Button if clicked sends user to PostActivity
         addNewPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +163,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        //Button if clicked by mod account sends mod to ModActivity
         modButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,6 +171,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        //Button if clicked sends user to PostVideoActivity
         addNewVideoPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,10 +180,13 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        //Display all posts inside of database
         DisplayAllUsersPosts();
 
     }
 
+
+    //Display all posts inside of database function
     private void DisplayAllUsersPosts() {
 
         FirebaseRecyclerOptions<Posts> options=new FirebaseRecyclerOptions.Builder<Posts>().setQuery(postsRef,Posts.class).build();
@@ -297,6 +304,7 @@ public class Home extends AppCompatActivity {
             currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
 
+        //Check each posts of how many likes are accumulated under the post and counting it and sending information back to update post like count
         public void setLikeButtonStatus(final String postKey){
             likesRef.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -322,6 +330,7 @@ public class Home extends AppCompatActivity {
 
     }
 
+    //Check which item was clicked
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(actionBarToggle.onOptionsItemSelected(item)){
@@ -330,28 +339,33 @@ public class Home extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Sends user to PostActivity function
     private void SendUserToPostActivity() {
         Intent intent = new Intent(Home.this, PostActivity.class);
         startActivity(intent);
 
     }
 
+    //Sends mod to ModActivity function
     private void SendModtoModActivity() {
         Intent intent = new Intent(Home.this, ModActivity.class);
         startActivity(intent);
 
     }
 
+    //Sends user to ProfileActivity function
     private void SendUserToProfileActivity() {
         Intent intent = new Intent(Home.this, ProfileActivity.class);
         startActivity(intent);
 
     }
 
+    //Signs the user out
     public void signOut(){
         auth.signOut();
     }
 
+    //Menu of items that can be clicked
     private void UserMenuSelector(MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_post:

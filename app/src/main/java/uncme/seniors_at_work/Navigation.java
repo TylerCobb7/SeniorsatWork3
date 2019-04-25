@@ -38,6 +38,7 @@ public class Navigation extends AppCompatActivity {
 
     }
 
+    //Navigation menu
     private void UserMenuSelector(MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_profile:

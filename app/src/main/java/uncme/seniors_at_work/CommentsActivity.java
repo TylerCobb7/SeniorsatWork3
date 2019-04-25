@@ -67,6 +67,7 @@ public class CommentsActivity extends AppCompatActivity {
         postCommentBtn = (ImageButton)findViewById(R.id.post_Comment_Button);
         postCommentInput = (EditText)findViewById(R.id.comment_Input);
 
+        //Listener to check for datasnapshot existence
         postCommentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +97,7 @@ public class CommentsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        //Query for comments display
         FirebaseRecyclerOptions<Comments> options=new FirebaseRecyclerOptions.Builder<Comments>().setQuery(postsRef,Comments.class).build();
         FirebaseRecyclerAdapter<Comments, CommentsViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Comments, CommentsViewHolder>(options) {
             @Override
@@ -120,6 +122,7 @@ public class CommentsActivity extends AppCompatActivity {
         firebaseRecyclerAdapter.startListening();
     }
 
+    //Sends query and pulls comments into recyclerview
     public static class CommentsViewHolder extends RecyclerView.ViewHolder{
         View mView;
         CircleImageView profileImage;
@@ -153,6 +156,7 @@ public class CommentsActivity extends AppCompatActivity {
 
     }
 
+    //Validate comment if empty, if not then create hashmap of user information and sends it to database
     private void ValidateComment(String userName, String image) {
         String commentText = postCommentInput.getText().toString();
 

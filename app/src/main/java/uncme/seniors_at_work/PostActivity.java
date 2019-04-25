@@ -90,6 +90,8 @@ public class PostActivity extends AppCompatActivity {
 
     }
 
+    //Validate post information.
+    //Checks if image exist, description is empty, and if posting anonymously
     private void ValidatePostInfo() {
         description = postDescription.getText().toString();
 
@@ -109,6 +111,7 @@ public class PostActivity extends AppCompatActivity {
         }
     }
 
+    //Sends post data to firebase
     private void StoringImageToFirebaseStorage() {
 
         Calendar calForDate = Calendar.getInstance();
@@ -150,6 +153,7 @@ public class PostActivity extends AppCompatActivity {
 
     }
 
+    //Sends post to firebase as anonymous
     private void StoringImageToFirebaseStorageAnon() {
 
         Calendar calForDate = Calendar.getInstance();
@@ -191,6 +195,7 @@ public class PostActivity extends AppCompatActivity {
 
     }
 
+    //Saving post as the user
     private void SavingPostInformationToDatabase(final String url) {
         usersRef.child(current_USER_ID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -231,6 +236,7 @@ public class PostActivity extends AppCompatActivity {
         });
     }
 
+    //Saving post info as anonymous
     private void SavingPostInformationToDatabaseAnon(final String url) {
         usersRef.child(current_USER_ID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -271,11 +277,13 @@ public class PostActivity extends AppCompatActivity {
         });
     }
 
+    //Send user to HomeActivity
     private void SendUserToMainActivity() {
         Intent intent = new Intent(PostActivity.this, Home.class);
         startActivity(intent);
     }
 
+    //Opens gallery from inside the phone
     private void OpenGallery() {
         Intent galleryIntent = new Intent();
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
@@ -283,6 +291,7 @@ public class PostActivity extends AppCompatActivity {
         startActivityForResult(galleryIntent, Gallery_Pick);
     }
 
+    //Checks for all criteria to allow app to upload image
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

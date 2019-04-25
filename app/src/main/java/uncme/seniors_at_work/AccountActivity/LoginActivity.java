@@ -73,11 +73,13 @@ public class LoginActivity extends AppCompatActivity {
                 String email = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
 
+                //Check to see if email line is empty
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter your UNCC email address!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                //Check to see if password line is empty
                 if (TextUtils.isEmpty(password)) {
                     Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
                     return;
@@ -105,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                                     currentUserID = auth.getCurrentUser().getUid();
                                     bannedRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("banned");
 
+                                    //Check database to see whether or not account is banned
                                     bannedRef.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

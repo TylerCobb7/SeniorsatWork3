@@ -111,6 +111,7 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
             }
         });
 
+        //updates profile image of user by pulling from database
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +122,7 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
             }
         });
 
+        //updates all lines of input of information pulled from database
         usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
@@ -190,6 +192,7 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
             }
         });
 
+        //Delete the account from firebase
         deleteAccountButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -250,6 +253,7 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
         });
     }
 
+    //Validate image that is being uploaded
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -300,6 +304,7 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
         }
     }
 
+    //Saves and updates information inputted into database and replacing old information
     private void SaveUserInfo() {
 
         String username = editTextUserName.getText().toString();
@@ -369,6 +374,7 @@ public class EditAccountSettingsActivity extends AppCompatActivity {
         }
     }
 
+    //Send user to Home activity
     private void SendToProfileActivity() {
         Intent intent = new Intent(EditAccountSettingsActivity.this, Home.class);
         finish();

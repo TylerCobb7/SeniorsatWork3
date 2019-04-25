@@ -112,6 +112,7 @@ public class PostVideoActivity extends AppCompatActivity {
 
     }
 
+    //Upload video into database as anonymous or as the user
     public void upload(View view){
         if(videoUri != null){
             final UploadTask uploadTask = videoRef.putFile(videoUri);
@@ -147,11 +148,12 @@ public class PostVideoActivity extends AppCompatActivity {
         }
     }
 
+    //Validate information from the post to see if video exist to upload or if description is empty
     private void ValidatePostInfo() {
         description = videoDescription.getText().toString();
 
         if(videoUri == null){
-            Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please select a video...", Toast.LENGTH_SHORT).show();
         }
         if(TextUtils.isEmpty(description)){
             Toast.makeText(this, "Post description is empty...", Toast.LENGTH_SHORT).show();
@@ -161,6 +163,7 @@ public class PostVideoActivity extends AppCompatActivity {
         }
     }
 
+    //Saves post under anonymous
     private void SavingPostInformationToDatabaseAnon(final String downloadURL) {
         usersRef.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
@@ -203,6 +206,7 @@ public class PostVideoActivity extends AppCompatActivity {
         });
     }
 
+    //Saves post under the user
     private void SavingPostInformationToDatabase(final String downloadURL) {
         usersRef.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
@@ -245,11 +249,13 @@ public class PostVideoActivity extends AppCompatActivity {
         });
     }
 
+    //Sends user to MainActivity
     private void SendUserToMainActivity() {
         Intent intent = new Intent(PostVideoActivity.this, Home.class);
         startActivity(intent);
     }
 
+    //Update progress bar as file is being uploaded
     public void updateProgress(UploadTask.TaskSnapshot taskSnapshot){
         long fileSize = taskSnapshot.getTotalByteCount();
         long uploadBytes = taskSnapshot.getBytesTransferred();
@@ -259,6 +265,7 @@ public class PostVideoActivity extends AppCompatActivity {
         progressBar.setProgress((int) progress);
     }
 
+    //Record function to record from the phone camera
     public void record(View view){
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
         if(intent.resolveActivity(getPackageManager()) != null) {
@@ -266,6 +273,7 @@ public class PostVideoActivity extends AppCompatActivity {
         }
     }
 
+    //Download function to download the file from firebase storage to be able to view and play it
     public void download(View view){
         try{
             localFile = File.createTempFile("userVideo", "mp4");
@@ -290,6 +298,7 @@ public class PostVideoActivity extends AppCompatActivity {
         }
     }
 
+    //Check criteria to see if video is able to upload
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

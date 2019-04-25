@@ -48,12 +48,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
                 String email = inputEmail.getText().toString().trim();
 
+                //Validation to check if email line is empty
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplication(), "Enter your registered email id", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 progressBar.setVisibility(View.VISIBLE);
+                //Sends email instructions to reset forgotten or stolen passwords
                 auth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

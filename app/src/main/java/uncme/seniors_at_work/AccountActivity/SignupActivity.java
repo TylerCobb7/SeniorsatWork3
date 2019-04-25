@@ -69,18 +69,33 @@ public class SignupActivity extends AppCompatActivity {
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
+                //Validation to see if email line is empty
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter your UNCC email address!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                //Validation to see if password line is empty
                 if (TextUtils.isEmpty(password)) {
                     Toast.makeText(getApplicationContext(), "Create your password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                //Validation to see if password is less than 6
                 if (password.length() < 6) {
                     Toast.makeText(getApplicationContext(), "Password is too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //Validation if email contains @
+                if(!email.contains("@")){
+                    Toast.makeText(SignupActivity.this, "This is not a valid email!.. ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //Validation if email used contains @uncc.edu
+                if(!email.contains("@uncc.edu")){
+                    Toast.makeText(SignupActivity.this, "Sorry, only emails with @uncc.edu can use this app..", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -113,6 +128,7 @@ public class SignupActivity extends AppCompatActivity {
                                     String banned = "false";
                                     String userProfileImage = "https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/profile%20Images%2Fprofile.png?alt=media&token=f367aa11-c7b5-40eb-a663-fae9074faecf";
 
+                                    //Create user Hashmap then inputting values into firebase database
                                     HashMap userMap = new HashMap();
                                     userMap.put("aboutMe", userAboutMe);
                                     userMap.put("gender", userGender);
@@ -143,6 +159,7 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
+    //Send user to next activity
     private void SendToProfileActivity() {
         Intent intent = new Intent(SignupActivity.this, Home.class);
         finish();

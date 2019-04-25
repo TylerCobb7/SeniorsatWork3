@@ -76,6 +76,7 @@ public class ClickPostActivity extends AppCompatActivity {
         postEditButton.setVisibility(View.INVISIBLE);
         banUserButton.setVisibility(View.INVISIBLE);
 
+        //Update activity with information from database regarding the post that was clicked
         clickPostRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -119,6 +120,7 @@ public class ClickPostActivity extends AppCompatActivity {
             }
         });
 
+        //Delete post from database
         postDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,6 +128,7 @@ public class ClickPostActivity extends AppCompatActivity {
             }
         });
 
+        //Change value for "banned" to "true" in database
         banUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,6 +141,7 @@ public class ClickPostActivity extends AppCompatActivity {
 
     }
 
+    //Download video content from firebase storage
     public void download(View view){
         try{
             localFile = File.createTempFile("uservideo", "mp4");
@@ -163,6 +167,7 @@ public class ClickPostActivity extends AppCompatActivity {
         }
     }
 
+    //Ban the user of the post function
     private void BanPostUser() {
         String user = PostKey;
         String substring = user.substring(0, 28);
@@ -184,6 +189,7 @@ public class ClickPostActivity extends AppCompatActivity {
 
     }
 
+    //Edit the post function
     private void EditCurrentPost(String description) {
         AlertDialog.Builder builder = new AlertDialog.Builder(ClickPostActivity.this);
         builder.setTitle("Edit Post: ");
@@ -212,12 +218,14 @@ public class ClickPostActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.holo_blue_light);
     }
 
+    //Delete the post function
     private void DeleteCurrentPost() {
         clickPostRef.removeValue();
         SendUserToHomePage();
         Toast.makeText(this, "Post has been deleted..", Toast.LENGTH_SHORT).show();
     }
 
+    //Send user to home activity
     private void SendUserToHomePage() {
         Intent mainIntent = new Intent(ClickPostActivity.this, Home.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

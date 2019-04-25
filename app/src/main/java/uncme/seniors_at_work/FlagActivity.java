@@ -44,6 +44,8 @@ public class FlagActivity extends AppCompatActivity {
         hateBtn = (Button)findViewById(R.id.hateBtn);
         progressBar =(ProgressBar)findViewById(R.id.progressBar2);
 
+
+        //Change String object "info" to designated reason of flag
         sexBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +73,7 @@ public class FlagActivity extends AppCompatActivity {
 
     }
 
+    //Creates a new database info tab under the post that was flagged of who flagged it
     private void sendFlagInformation(String info) {
         progressBar.setVisibility(View.VISIBLE);
 
@@ -115,6 +118,7 @@ public class FlagActivity extends AppCompatActivity {
             });
     }
 
+    //Send user to Home activity
     private void SendToHomeActivity() {
         Intent intent = new Intent(FlagActivity.this, Home.class);
         startActivity(intent);

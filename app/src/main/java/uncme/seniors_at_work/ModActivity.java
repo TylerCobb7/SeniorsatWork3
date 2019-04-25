@@ -78,6 +78,7 @@ public class ModActivity extends AppCompatActivity {
         userPostList.setLayoutManager(linearLayoutManager);
 
 
+        //Check and pull information to update flagged posts listed
         myRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -100,9 +101,11 @@ public class ModActivity extends AppCompatActivity {
             }
         });
 
+        //Display all flagged posts
         DisplayAllFlaggedPosts();
     }
 
+    //Display flagged post function
     private void DisplayAllFlaggedPosts() {
 
         Query flagged = postsRef.orderByChild("flagged").equalTo("true");

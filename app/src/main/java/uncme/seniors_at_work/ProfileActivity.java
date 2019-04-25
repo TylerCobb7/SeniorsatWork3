@@ -82,6 +82,7 @@ public class ProfileActivity extends AppCompatActivity {
         userPostList.setLayoutManager(linearLayoutManager);
 
 
+        //Pull information from database to update the view in app
         myRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -107,6 +108,7 @@ public class ProfileActivity extends AppCompatActivity {
         DisplayAllUsersPosts();
     }
 
+    //Display all posts from current user
     private void DisplayAllUsersPosts() {
 
         Query currentUsersPost = postsRef.orderByChild("uid").equalTo(currentUserID);
@@ -145,6 +147,7 @@ public class ProfileActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter.startListening();
     }
 
+    //Sends all information regarding user's posts and updating the RecyclerView to display the posts
     public static class PostsViewHolder extends RecyclerView.ViewHolder{
         TextView username,date,time,description;
         CircleImageView user_post_image;
