@@ -131,6 +131,7 @@ public class ModActivity extends AppCompatActivity {
                         startActivity(clickPostIntent);
                     }
                 });
+                holder.setLikeButtonStatus(PostKey);
             }
             @NonNull
             @Override
