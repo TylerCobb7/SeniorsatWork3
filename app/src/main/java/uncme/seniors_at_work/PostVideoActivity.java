@@ -28,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -182,6 +183,7 @@ public class PostVideoActivity extends AppCompatActivity {
                     postsMap.put("storageKey", databaseToStoragePull);
                     postsMap.put("profileImage", userProfileImage);
                     postsMap.put("username", userName);
+                    postsMap.put("timestamp", ServerValue.TIMESTAMP);
 
                     postsRef.child(uid + postRandomName).updateChildren(postsMap).addOnCompleteListener(new OnCompleteListener() {
                         @Override
@@ -225,6 +227,7 @@ public class PostVideoActivity extends AppCompatActivity {
                    postsMap.put("postVideo", downloadURL);
                    postsMap.put("profileImage", userProfileImage);
                    postsMap.put("username", userName);
+                   postsMap.put("timestamp", ServerValue.TIMESTAMP);
 
                    postsRef.child(uid + postRandomName).updateChildren(postsMap).addOnCompleteListener(new OnCompleteListener() {
                        @Override

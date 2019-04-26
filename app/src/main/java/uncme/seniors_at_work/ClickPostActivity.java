@@ -87,7 +87,7 @@ public class ClickPostActivity extends AppCompatActivity {
 
 
                     postDescription.setText(description);
-                    if(image.equals("https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/Post%20Media%2Fplaybutton.png?alt=media&token=e1ee3158-5b93-405c-b8e1-635e28663af1")) {
+                    if(image.equals("https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/Post%20Media%2Fplaybutton.png?alt=media&token=46ed4509-3d84-4c96-b2fc-0bc1db17a1b6")) {
                         postImage.setVisibility(View.GONE);
                         postVideo.setVisibility(View.VISIBLE);
                         download(postVideo);

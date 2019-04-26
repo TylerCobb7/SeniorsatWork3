@@ -189,6 +189,7 @@ public class Home extends AppCompatActivity {
     //Display all posts inside of database function
     private void DisplayAllUsersPosts() {
 
+
         FirebaseRecyclerOptions<Posts> options=new FirebaseRecyclerOptions.Builder<Posts>().setQuery(postsRef,Posts.class).build();
         FirebaseRecyclerAdapter<Posts, PostsViewHolder> FirebaseRecyclerAdapter=new FirebaseRecyclerAdapter<Posts, PostsViewHolder>(options) {
             @Override

@@ -27,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -212,6 +213,7 @@ public class PostActivity extends AppCompatActivity {
                     postsMap.put("postImage", url);
                     postsMap.put("profileImage", userProfileImage);
                     postsMap.put("username", userName);
+                    postsMap.put("timestamp", ServerValue.TIMESTAMP);
 
                     postsRef.child(current_USER_ID + postRandomName).updateChildren(postsMap).addOnCompleteListener(new OnCompleteListener() {
                         @Override
@@ -253,6 +255,7 @@ public class PostActivity extends AppCompatActivity {
                     postsMap.put("postImage", url);
                     postsMap.put("profileImage", userProfileImage);
                     postsMap.put("username", userName);
+                    postsMap.put("timestamp", ServerValue.TIMESTAMP);
 
                     postsRef.child(current_USER_ID + postRandomName).updateChildren(postsMap).addOnCompleteListener(new OnCompleteListener() {
                         @Override
