@@ -45,6 +45,19 @@
         android:padding="8dp"/>
 
     <Button
+        android:id="@+id/unflag_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ban_user_button"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="UNFLAG VIDEO"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:background="#ffffff"/>
+
+    <Button
         android:id="@+id/ban_user_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

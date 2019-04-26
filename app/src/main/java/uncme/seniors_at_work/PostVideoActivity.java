@@ -78,7 +78,7 @@ public class PostVideoActivity extends AppCompatActivity {
         anonymousBtn = (RadioButton)findViewById(R.id.anonymous_button);
         recordButton = (Button)findViewById(R.id.recordButton);
 
-        postImage = "https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/Post%20Media%2Fplaybutton.png?alt=media&token=e1ee3158-5b93-405c-b8e1-635e28663af1";
+        postImage = "https://firebasestorage.googleapis.com/v0/b/seniors-at-work.appspot.com/o/Post%20Media%2Fplaybutton.png?alt=media&token=46ed4509-3d84-4c96-b2fc-0bc1db17a1b6";
 
         Calendar calForDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");

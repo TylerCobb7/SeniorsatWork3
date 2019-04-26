@@ -51,6 +51,7 @@ public class ClickPostActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     File localFile;
     VideoView postVideo;
+    Button unflagButton;
 
     String PostKey, currentUserID, databaseUserID, description, image;
 
@@ -71,10 +72,13 @@ public class ClickPostActivity extends AppCompatActivity {
         postEditButton = (Button)findViewById(R.id.edit_post_button);
         postDeleteButton = (Button)findViewById(R.id.delete_post_button);
         banUserButton = (Button)findViewById(R.id.ban_user_button);
+        unflagButton = (Button)findViewById(R.id.unflag_button);
 
         postDeleteButton.setVisibility(View.INVISIBLE);
         postEditButton.setVisibility(View.INVISIBLE);
         banUserButton.setVisibility(View.INVISIBLE);
+        unflagButton.setVisibility(View.INVISIBLE);
+
 
         //Update activity with information from database regarding the post that was clicked
         clickPostRef.addValueEventListener(new ValueEventListener() {
@@ -102,6 +106,7 @@ public class ClickPostActivity extends AppCompatActivity {
                         postEditButton.setVisibility(View.VISIBLE);
                         if(currentUserID.equals("knZTjI9U4qdF8GGEXxPH7VItSdm2")){
                             banUserButton.setVisibility(View.VISIBLE);
+                            unflagButton.setVisibility(View.VISIBLE);
                         }
                     }
 
@@ -128,7 +133,7 @@ public class ClickPostActivity extends AppCompatActivity {
             }
         });
 
-        //Change value for "banned" to "true" in database
+        //Change value for "banned" to "true" to post in database
         banUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,8 +141,37 @@ public class ClickPostActivity extends AppCompatActivity {
             }
         });
 
+        //Change value for "flagged" to "false" in database
+        unflagButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UnFlagPost();
+            }
+        });
 
 
+
+
+    }
+
+    //Unflag a flagged post in database
+    private void UnFlagPost() {
+
+        DatabaseReference postRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+        HashMap bannedMap = new HashMap();
+        bannedMap.put("flagged", "false");
+        postRef.child(PostKey).updateChildren(bannedMap).addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if(task.isSuccessful()){
+                    finish();
+                }
+                else{
+                    String message = task.getException().getMessage();
+                    Toast.makeText(ClickPostActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
 
